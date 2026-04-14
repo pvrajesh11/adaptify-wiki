@@ -6,7 +6,7 @@ products_active: [auto-ppa]
 doi_name: "Alaska Division of Insurance"
 statutory_refs:
   - "Act 164 — Transportation network driver coverage requirements"
-  - "Alaska Statute 18.66 — (referenced in amendatory endorsement, see filing summary)"
+  - "Alaska Statute 18.66 — Innocent insured protection and domestic violence subrogation (auto-ppa)"
   - "75 Pa. C.S. § 1535 — (appears in driving record point rules; flagged as possible document artifact — verify)"
 last_updated: 2026-04-14
 ---
@@ -19,9 +19,9 @@ Alaska Division of Insurance
 
 ## Active Products
 
-| Product | Manual Version | Source Entry | Ingested |
-|---|---|---|---|
-| auto-ppa | 1.5 | 2026-04-14_auto-ppa_AK_manual_v1.5 | 2026-04-14 |
+| Product | Manual Version | Effective Date | SERFF Tracking | NAIC | Status |
+|---|---|---|---|---|---|
+| auto-ppa | 1.5 | 2026-01-01 | SRFF-TEST-AK-PPA-0001 | 99999 | Approved |
 
 ## Key Statutes Referenced
 
@@ -33,6 +33,7 @@ Alaska Division of Insurance
 
 | Ingested | Product | Version | Doc Type | Entry ID |
 |---|---|---|---|---|
+| 2026-04-14 | auto-ppa | — | filing-summary | 2026-04-14_auto-ppa_AK_filing-summary |
 | 2026-04-14 | auto-ppa | 1.5 | manual | 2026-04-14_auto-ppa_AK_manual_v1.5 |
 
 ## DOI Correspondence

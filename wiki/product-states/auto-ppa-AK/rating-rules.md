@@ -8,7 +8,7 @@ multistate_base: "multistate/auto-ppa"
 source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5"]
 version_current: "1.5"
 version_history: ["1.5"]
-effective_date: null
+effective_date: 2026-01-01
 last_updated: 2026-04-14
 ---
 
@@ -47,4 +47,4 @@ _(Multistate base not yet ingested — table will be completed after MULTI PAU M
 
 | Version | Effective Date | Key Changes |
 |---|---|---|
-| 1.5 | TBD (pending filing summary ingest) | First ingested version |
+| 1.5 | 2026-01-01 | First ingested version |

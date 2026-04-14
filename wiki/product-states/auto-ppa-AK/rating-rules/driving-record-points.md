@@ -6,7 +6,7 @@ state: AK
 parent: rating-rules
 sub: driving-record-points
 source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5"]
-scope_notes: "Structure ingested from AK state manual. Scope vs multistate base TBD after MULTI manual ingested."
+scope_notes: "Point structure differs from multistate base in 5 cells — see deviation table below."
 last_updated: 2026-04-14
 ---
 
@@ -14,8 +14,10 @@ last_updated: 2026-04-14
 
 Parent: [[product-states/auto-ppa-AK/rating-rules]]
 Source: PAU AK MAN-1.5 §6.4.1, §6.4.2
+Multistate base: [[multistate/auto-ppa/rating-rules/driving-record-points]]
 
-> Scope note: This structure was extracted from the AK state manual. Whether these rules are multistate or AK-specific will be confirmed after ingesting MULTI PAU Manual 01 21.docx.
+> **AK deviations from multistate base:** 5 cells differ in the point table. See deviation table below.
+> Experience period, triggers, additional points, and most exceptions are `[multistate, unchanged]`.
 
 ---
 
@@ -37,15 +39,25 @@ A 2nd or subsequent violation within the experience period is assessed both the 
 
 ---
 
-## Point Structure
+## Point Structure `[multistate override — 5 cells differ]`
 
 | Classification | 0–<6 Mo | 0–<1 Yr | 1–<2 Yr | 2–<3 Yr | Add'l Violation Surcharge |
 |---|---|---|---|---|---|
 | Speeding Violation (non-Major) | N/A | 2 | 1 | 1 | 1 |
-| Minor Violation (non-Speeding) | N/A | 3 | 2 | 1 | 1 |
-| Major Violation | N/A | 4 | 3 | 3 | 1 |
-| At-Fault Accident | N/A | 3 | 2 | 1 | 1 |
+| Minor Violation (non-Speeding) | N/A | **3** ¹ | 2 | 1 | 1 |
+| Major Violation | N/A | 4 | 3 | **3** ² | **1** ³ |
+| At-Fault Accident | N/A | 3 | **2** ⁴ | **1** ⁵ | **1** ⁶ |
 | No Prior Insurance | 4 | N/A | N/A | N/A | N/A |
+
+AK deviations from multistate base (bold cells):
+1. Minor Violation 0–<1yr: AK **3** vs multistate 2
+2. Major Violation 2–<3yr: AK **3** vs multistate 2
+3. Major Violation add'l surcharge: AK **1** vs multistate 2
+4. At-Fault Accident 1–<2yr: AK **2** vs multistate 3
+5. At-Fault Accident 2–<3yr: AK **1** vs multistate 2
+6. At-Fault Accident add'l surcharge: AK **1** vs multistate 0
+
+(SOURCE: 2026-04-14_auto-ppa_AK_manual_v1.5 §6.4.1)
 
 Violation classification follows the AAMVA Code Dictionary.
 
@@ -81,6 +93,10 @@ Violation classification follows the AAMVA Code Dictionary.
 
 ---
 
-## Financial Responsibility Filing `[AK-specific]`
+## Financial Responsibility Filing `[multistate override]`
 
-Rule **does not apply** in Alaska. (SOURCE: 2026-04-14_auto-ppa_AK_manual_v1.5 §6.4.2)
+Rule **does not apply** in Alaska. Multistate rule (6.4.2) applies in all other states. (SOURCE: 2026-04-14_auto-ppa_AK_manual_v1.5 §6.4.2)
+
+## Unverifiable Driving Record `[multistate, status unconfirmed]`
+
+Multistate Rule 6.4.3 applies to drivers whose history cannot be verified. The AK state manual does not address this rule explicitly — verify whether multistate rule applies in AK.

@@ -32,7 +32,7 @@ State pages currently document all rules — deviations table will be completed 
 
 | State | Manual Version | Effective Date | Rating Rules | Endorsements |
 |---|---|---|---|---|
-| AK | 1.5 | TBD | [[product-states/auto-ppa-AK/rating-rules]] | [[product-states/auto-ppa-AK/endorsements]] |
+| AK | 1.5 | 2026-01-01 | [[product-states/auto-ppa-AK/rating-rules]] | [[product-states/auto-ppa-AK/endorsements]] |
 
 ## Key Forms
 

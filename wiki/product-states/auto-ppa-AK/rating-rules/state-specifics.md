@@ -5,7 +5,7 @@ product: auto-ppa
 state: AK
 parent: rating-rules
 sub: state-specifics
-source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5"]
+source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5", "2026-04-14_auto-ppa_AK_form_PPA-0154-01-20"]
 last_updated: 2026-04-14
 ---
 
@@ -85,6 +85,36 @@ Attach: **PA 6604** — Transportation Network Program Coverage
 Premium (all phases): primary use classification (Rule 7.3.1) + applicable ride-sharing use factor from state pages.
 
 The policy may provide some or all required amounts; if provided, must be at least equal to Alaska's financial responsibility minimums.
+
+---
+
+## Domestic Violence — Physical Damage Exception `[AK-specific]`
+
+Applied via endorsement **PPA 0154 01 20** (Amendatory Endorsement — Alaska). (SOURCE: 2026-04-14_auto-ppa_AK_form_PPA-0154-01-20 §1)
+
+The Part D intentional acts exclusion does **not** apply to an innocent insured who suffers a covered loss caused by an act of domestic violence (as defined by Alaska statute) committed by or at the direction of another insured, provided the innocent insured:
+- Did not cooperate with or contribute to the act, AND
+- Files for a protective order under Alaska Statute 18.66, OR seeks a warrant for the abuser's arrest and cooperates in prosecution
+
+Payment to the innocent insured may be limited to that person's insurable interest, less any payment to a mortgagee or party with a legal secured interest.
+
+**Subrogation:** An innocent insured who is the subject of domestic violence cannot waive subrogation rights. Company retains all rights to recover up to amounts paid. (SOURCE: 2026-04-14_auto-ppa_AK_form_PPA-0154-01-20 §2)
+
+---
+
+## Renewal Notice Requirement `[AK-specific]`
+
+Applied via endorsement **PPA 0154 01 20**. (SOURCE: 2026-04-14_auto-ppa_AK_form_PPA-0154-01-20 §3)
+
+If the company intends to renew the policy subject to a premium increase (other than an increase due to a change at the named insured's request), the company must give the named insured at least **30 days' prior notice** before the renewal effective date.
+
+---
+
+## Suit Against Us — Alaska Statute of Limitations `[AK-specific]`
+
+Applied via endorsement **PPA 0154 01 20**. (SOURCE: 2026-04-14_auto-ppa_AK_form_PPA-0154-01-20 §4)
+
+No suit may be brought against the company unless all applicable property coverage terms have been complied with AND the suit is brought within the time period prescribed by **Alaska law** for commencement of such action. (Base form uses a fixed contractual time period; AK endorsement substitutes the Alaska statute of limitations.)
 
 ---
 
