@@ -12,9 +12,9 @@ last_updated: 2026-04-14
 
 # Auto PPA — Alaska — Driving Record Points
 
-Parent: [[product-states/auto-ppa-AK/rating-rules]]
+Parent: [Auto PPA — Alaska — Rating Rules](../rating-rules.md)
 Source: PAU AK MAN-1.5 §6.4.1, §6.4.2
-Multistate base: [[multistate/auto-ppa/rating-rules/driving-record-points]]
+Multistate base: [Auto PPA — Multistate — Driving Record Points](../../../multistate/auto-ppa/rating-rules/driving-record-points.md)
 
 > **AK deviations from multistate base:** 5 cells differ in the point table. See deviation table below.
 > Experience period, triggers, additional points, and most exceptions are `[multistate, unchanged]`.

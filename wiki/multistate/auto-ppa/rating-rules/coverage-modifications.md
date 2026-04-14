@@ -10,7 +10,7 @@ last_updated: 2026-04-14
 
 # Auto PPA — Multistate — Coverage Modifications & Additional Options
 
-Parent: [[multistate/auto-ppa/rating-rules]]
+Parent: [Auto PPA — Multistate — Rating Rules](../rating-rules.md)
 Source: MULTI PAU Manual 01 21 §8, §9, §10
 
 ---

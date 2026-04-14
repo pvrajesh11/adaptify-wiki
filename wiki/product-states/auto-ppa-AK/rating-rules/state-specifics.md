@@ -11,7 +11,7 @@ last_updated: 2026-04-14
 
 # Auto PPA — Alaska — State-Specific Rules
 
-Parent: [[product-states/auto-ppa-AK/rating-rules]]
+Parent: [Auto PPA — Alaska — Rating Rules](../rating-rules.md)
 Source: PAU AK MAN-1.5 §4.9, §7.3.2, §10.2, §10.5, §11.1, §11.2, §11.5
 
 ---

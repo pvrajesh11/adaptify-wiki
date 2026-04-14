@@ -11,7 +11,7 @@ last_updated: 2026-04-14
 
 # Auto PPA — Alaska — Coverage Options
 
-Parent: [[product-states/auto-ppa-AK/rating-rules]]
+Parent: [Auto PPA — Alaska — Rating Rules](../rating-rules.md)
 Source: PAU AK MAN-1.5 §3.1, §3.4, §3.7, §3.8, §3.9, §3.10, §5.4
 
 ---

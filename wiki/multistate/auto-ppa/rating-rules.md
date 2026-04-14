@@ -11,7 +11,7 @@ last_updated: 2026-04-14
 # Auto PPA — Multistate — Rating Rules
 
 Source: MULTI PAU Manual 01 21
-See also: [[multistate/auto-ppa/endorsements]] | [[products/auto-ppa]]
+See also: [Auto PPA — Multistate — Endorsements](endorsements.md) | [Auto PPA](../../products/auto-ppa.md)
 
 > These rules apply in all states unless explicitly overridden in a state manual.
 > State-specific overrides are documented in the relevant product-state page.
@@ -20,9 +20,9 @@ See also: [[multistate/auto-ppa/endorsements]] | [[products/auto-ppa]]
 
 ## Sub-Pages
 
-- [[multistate/auto-ppa/rating-rules/coverage-options]] — eligibility, coverage parts, UM/UIM, physical damage, non-owner coverages
-- [[multistate/auto-ppa/rating-rules/driving-record-points]] — point structure, driver discounts, vehicle rules
-- [[multistate/auto-ppa/rating-rules/coverage-modifications]] — coverage modifications and additional options
+- [Coverage Options](rating-rules/coverage-options.md) — eligibility, coverage parts, UM/UIM, physical damage, non-owner coverages
+- [Driving Record Points](rating-rules/driving-record-points.md) — point structure, driver discounts, vehicle rules
+- [Coverage Modifications](rating-rules/coverage-modifications.md) — coverage modifications and additional options
 
 ---
 

@@ -10,7 +10,7 @@ last_updated: 2026-04-14
 
 # Auto PPA — Multistate — Driving Record Points
 
-Parent: [[multistate/auto-ppa/rating-rules]]
+Parent: [Auto PPA — Multistate — Rating Rules](../rating-rules.md)
 Source: MULTI PAU Manual 01 21 §6.4, §6.1–6.5
 
 ---
@@ -51,7 +51,7 @@ When multiple violations from one occurrence: use only the highest point-value v
 > - At-Fault Accident (2–<3yr): **1** (vs multistate 2)
 > - At-Fault Accident add'l surcharge: **1** (vs multistate 0)
 >
-> See [[product-states/auto-ppa-AK/rating-rules/driving-record-points]] for full AK table.
+> See [AK — Driving Record Points](../../../product-states/auto-ppa-AK/rating-rules/driving-record-points.md) for full AK table.
 
 ---
 

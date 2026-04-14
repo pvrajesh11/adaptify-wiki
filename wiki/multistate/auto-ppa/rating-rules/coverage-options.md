@@ -10,7 +10,7 @@ last_updated: 2026-04-14
 
 # Auto PPA — Multistate — Coverage Options
 
-Parent: [[multistate/auto-ppa/rating-rules]]
+Parent: [Auto PPA — Multistate — Rating Rules](../rating-rules.md)
 Source: MULTI PAU Manual 01 21 §2, §3, §4, §6.6
 
 ---
@@ -44,7 +44,7 @@ Separate premium charged for each vehicle and coverage.
 Available when PA 0001 covers liability of described vehicles. Per person / per accident basis. (SOURCE: 2026-04-14_auto-ppa_MULTI_manual_v01-21 §3.4)
 Combined Single Limit option: PA 0700.
 
-> **AK override:** Mandatory offering — named insured must reject in writing to waive. Must also elect stacked (PA 2161) or non-stacked (PA 2137). See [[product-states/auto-ppa-AK/rating-rules/coverage-options]].
+> **AK override:** Mandatory offering — named insured must reject in writing to waive. Must also elect stacked (PA 2161) or non-stacked (PA 2137). See [AK — Coverage Options](../../../product-states/auto-ppa-AK/rating-rules/coverage-options.md).
 
 ---
 

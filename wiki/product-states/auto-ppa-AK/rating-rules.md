@@ -16,15 +16,15 @@ last_updated: 2026-04-14
 
 State manual: PAU AK MAN-1.5 — Final
 Multistate base: multistate/auto-ppa/ (not yet ingested — ingest MULTI PAU Manual 01 21.docx)
-See also: [[product-states/auto-ppa-AK/endorsements]] | [[states/AK]] | [[products/auto-ppa]]
+See also: [AK — Endorsements](endorsements.md) | [Alaska (AK)](../../states/AK.md) | [Auto PPA](../../products/auto-ppa.md)
 
 ---
 
 ## Sub-Pages
 
-- [[product-states/auto-ppa-AK/rating-rules/coverage-options]] — coverage availability, UM/UIM rules, First Party Benefits, Limited Tort
-- [[product-states/auto-ppa-AK/rating-rules/driving-record-points]] — point assignment structure, exceptions, financial responsibility
-- [[product-states/auto-ppa-AK/rating-rules/state-specifics]] — rules not applying in AK, Transportation Network (Act 164), special vehicles, joint ownership, named driver exclusion
+- [Coverage Options](rating-rules/coverage-options.md) — coverage availability, UM/UIM rules, First Party Benefits, Limited Tort
+- [Driving Record Points](rating-rules/driving-record-points.md) — point assignment structure, exceptions, financial responsibility
+- [State-Specific Rules](rating-rules/state-specifics.md) — rules not applying in AK, Transportation Network (Act 164), special vehicles, joint ownership, named driver exclusion
 
 ---
 

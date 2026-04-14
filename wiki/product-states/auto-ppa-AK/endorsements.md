@@ -13,7 +13,7 @@ last_updated: 2026-04-14
 # Auto PPA — Alaska — Endorsements
 
 Source manual: PAU AK MAN-1.5 — Final
-See also: [[product-states/auto-ppa-AK/rating-rules]] | [[states/AK]]
+See also: [AK — Rating Rules](rating-rules.md) | [Alaska (AK)](../../states/AK.md)
 
 ---
 
