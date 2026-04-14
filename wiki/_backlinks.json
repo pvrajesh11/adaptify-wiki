@@ -1,1 +1,45 @@
-{}
+{
+  "products/auto-ppa": [
+    "product-states/auto-ppa-AK/rating-rules",
+    "product-states/auto-ppa-AK/endorsements",
+    "states/AK"
+  ],
+  "states/AK": [
+    "product-states/auto-ppa-AK/rating-rules",
+    "product-states/auto-ppa-AK/endorsements",
+    "products/auto-ppa"
+  ],
+  "product-states/auto-ppa-AK/rating-rules": [
+    "products/auto-ppa",
+    "product-states/auto-ppa-AK/endorsements"
+  ],
+  "product-states/auto-ppa-AK/endorsements": [
+    "products/auto-ppa",
+    "product-states/auto-ppa-AK/rating-rules"
+  ],
+  "coverages/uninsured-motorist": [
+    "products/auto-ppa",
+    "product-states/auto-ppa-AK/rating-rules"
+  ],
+  "coverages/underinsured-motorist": [
+    "product-states/auto-ppa-AK/rating-rules"
+  ],
+  "coverages/transportation-network": [
+    "product-states/auto-ppa-AK/rating-rules"
+  ],
+  "forms/PA-0001": [
+    "products/auto-ppa"
+  ],
+  "forms/PA-0154": [
+    "products/auto-ppa",
+    "product-states/auto-ppa-AK/endorsements"
+  ],
+  "forms/PA-9901": [
+    "products/auto-ppa",
+    "product-states/auto-ppa-AK/endorsements"
+  ],
+  "forms/PA-9902": [
+    "products/auto-ppa",
+    "product-states/auto-ppa-AK/endorsements"
+  ]
+}

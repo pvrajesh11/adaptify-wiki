@@ -1,1 +1,13 @@
-{}
+{
+  "2026-04-14_auto-ppa_AK_manual_v1.5": {
+    "absorbed_date": "2026-04-14",
+    "wiki_pages_updated": [
+      "wiki/products/auto-ppa.md",
+      "wiki/states/AK.md",
+      "wiki/product-states/auto-ppa-AK/rating-rules.md",
+      "wiki/product-states/auto-ppa-AK/endorsements.md",
+      "wiki/coverages/uninsured-motorist.md",
+      "wiki/coverages/transportation-network.md"
+    ]
+  }
+}
