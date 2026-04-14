@@ -27,7 +27,7 @@ Each state folder has three subfolders:
 ```
 wiki-entries/     # Step 1: One .md per source document (ingest output)
 wiki/
-  _index.md       # Master article catalog — update on every wiki change
+  index.md        # Master article catalog — update on every wiki change
   _log.md         # Append-only operation log — never edit past entries
   _backlinks.json # Reverse link map — rebuilt by /wiki cleanup
   _absorb_log.json # Tracks which source docs fed which wiki pages

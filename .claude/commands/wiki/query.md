@@ -18,7 +18,7 @@ Parse the question to identify:
 
 ## Step 2: Find relevant pages
 
-Read `wiki/_index.md` — scan all entries for pages relevant to the question's scope and type.
+Read `wiki/index.md` — scan all entries for pages relevant to the question's scope and type.
 
 Then check `wiki/_backlinks.json` — look for the key concepts in the question. Pages with high connectivity (many backlinks) are likely central to the answer.
 

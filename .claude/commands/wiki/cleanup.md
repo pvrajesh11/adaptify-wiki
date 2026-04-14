@@ -12,7 +12,7 @@ This operation is read-only except for writing the cleanup report file.
 
 ## Step 1: Inventory all wiki pages
 
-Read `wiki/_index.md` to get the full list of pages.
+Read `wiki/index.md` to get the full list of pages.
 Then verify each listed page actually exists on disk.
 
 ---

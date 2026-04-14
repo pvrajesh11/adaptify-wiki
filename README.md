@@ -2,7 +2,7 @@
 
 An LLM-maintained knowledge base covering rating rules, coverages, forms, and endorsements across product lines and states.
 
-**[→ Browse the Wiki](wiki/_index.md)**
+**[→ Browse the Wiki](wiki/index.md)**
 
 ---
 
@@ -16,7 +16,7 @@ An LLM-maintained knowledge base covering rating rules, coverages, forms, and en
 
 ## Quick Links
 
-- [Master Index](wiki/_index.md)
+- [Master Index](wiki/index.md)
 - [Auto PPA — Multistate Base](wiki/multistate/auto-ppa/rating-rules.md)
 - [Auto PPA — Alaska](wiki/product-states/auto-ppa-AK/rating-rules.md)
 

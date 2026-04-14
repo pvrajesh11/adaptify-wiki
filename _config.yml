@@ -1,0 +1,37 @@
+remote_theme: just-the-docs/just-the-docs
+
+title: Adaptify Insurance Wiki
+description: Insurance product knowledge base — rating rules, forms, and endorsements across states and product lines.
+url: "https://pvrajesh11.github.io"
+baseurl: "/adaptify-wiki"
+
+# Search
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+
+# Navigation
+nav_sort: case_insensitive
+
+# Footer
+footer_content: "Adaptify Insurance Wiki — LLM-maintained knowledge base"
+
+# Exclude internal and processing files from the rendered site
+exclude:
+  - wiki-entries/
+  - wiki/_log.md
+  - wiki/_absorb_log.json
+  - wiki/_backlinks.json
+  - CLAUDE.md
+  - schema.md
+  - Gemfile
+  - Gemfile.lock
+  - "*.sh"
+
+# Plugins
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag

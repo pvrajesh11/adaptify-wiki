@@ -20,7 +20,7 @@ Read the relevant entry file(s) from `wiki-entries/`. For each entry:
 
 ## Step 2: For each entry, determine which wiki pages to create or update
 
-Read `wiki/_index.md` to identify existing pages for this product/state.
+Read `wiki/index.md` to identify existing pages for this product/state.
 Read `schema.md` sections 4.1–4.5 for scope-aware routing rules.
 
 **Scope routing (from schema.md §4.1):**
@@ -96,7 +96,7 @@ Every page must have at least 15 lines of body content. No stubs without `stub: 
 
 ## Step 4: Update system files
 
-**`wiki/_index.md`**: Add or update entries for every page created or materially changed.
+**`wiki/index.md`**: Add or update entries for every page created or materially changed.
 Format: `- [[{relative path without .md}]] — {one-line description} ({version if applicable}, eff. {date})`
 
 **`wiki/_backlinks.json`**: For every new `[[wikilink]]` added to any page, add a reverse mapping:
