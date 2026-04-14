@@ -4,6 +4,43 @@ This document defines the rules for all wiki operations. Claude Code reads this 
 
 ---
 
+## 0. Core Design Principles
+
+### Multistate Base + State Diff Model
+
+Insurance manuals come in two layers:
+- **Multistate base** (`MULTI` in filename) — rules that apply across all states by default
+- **State manual** (state code in filename, e.g. `AK MAN`) — rules that override or extend the multistate base for a specific state
+
+**Wiki structure mirrors this:**
+```
+wiki/multistate/{product}/     ← compiled from MULTI manuals
+wiki/product-states/{product}-{STATE}/  ← only what DIFFERS from multistate base
+```
+
+A state page documents: (a) explicit overrides stated in the state manual, (b) rules the state manual says "do not apply", and (c) state-specific additions not in the multistate base. If a rule is identical to the multistate base, it is NOT repeated on the state page — instead link to `[[multistate/{product}/...]]`.
+
+**Ingest order matters:** Always ingest the MULTI manual before the state manual. The absorb step for state manuals requires the multistate pages to exist.
+
+### No Broken Wikilinks
+
+Before writing any `[[wikilink]]` in any page, verify the target page exists on disk. If the target does not yet exist, write the reference as plain text with a note `(page not yet created)` rather than as a wikilink. This keeps the wiki navigable at all times.
+
+### Rating Rules Sub-Pages
+
+The `product-states/{product}-{STATE}/rating-rules.md` file is an **index page** that links to sub-pages. Content is split as follows:
+
+```
+rating-rules.md                  ← index: list of sub-pages + brief summary of each
+rating-rules/coverage-options.md ← all coverage parts, UM/UIM rules, FPB, tort options
+rating-rules/driving-record-points.md ← point assignment structure, exceptions
+rating-rules/state-specifics.md  ← state-specific carve-outs, special vehicles, TNP
+```
+
+Apply the same sub-page pattern to multistate pages when they exceed ~100 lines.
+
+---
+
 ## 1. Frontmatter Specification
 
 Every wiki page **must** include YAML frontmatter. Required fields vary by page type.
@@ -15,7 +52,7 @@ Every wiki page **must** include YAML frontmatter. Required fields vary by page 
 title: "Personal Automobile (PPA)"
 type: product
 product: auto-ppa
-states_active: [AK, AL]        # states with filings in this wiki
+states_active: [AK, AL]
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -29,12 +66,26 @@ type: state-meta
 state: AK
 products_active: [auto-ppa, homeowners-hobp]
 doi_name: "Alaska Division of Insurance"
-statutory_refs: []             # list of key statutes referenced across products
+statutory_refs: []
 last_updated: YYYY-MM-DD
 ---
 ```
 
-### 1.3 Product-State Page (`wiki/product-states/{product}-{STATE}/{page}.md`)
+### 1.3 Multistate Base Page (`wiki/multistate/{product}/{page}.md`)
+
+```yaml
+---
+title: "Auto PPA — Multistate — Coverage Options"
+type: multistate
+product: auto-ppa
+page: coverage-options           # rating-rules | coverage-options | driving-record-points | endorsements
+source_docs: []                  # MULTI manual entry IDs
+version_current: "01 21"
+last_updated: YYYY-MM-DD
+---
+```
+
+### 1.4 Product-State Index Page (`wiki/product-states/{product}-{STATE}/rating-rules.md`)
 
 ```yaml
 ---
@@ -42,16 +93,48 @@ title: "Auto PPA — Alaska — Rating Rules"
 type: product-state
 product: auto-ppa
 state: AK
-page: rating-rules             # rating-rules | forms | endorsements | state-specifics
-source_docs: []                # list of entry IDs that fed this page
+page: rating-rules
+multistate_base: "multistate/auto-ppa"   # which multistate base this extends
+source_docs: []
 version_current: "1.5"
-version_history: ["1.0", "1.4", "1.5"]
-effective_date: YYYY-MM-DD
+version_history: ["1.5"]
+effective_date: YYYY-MM-DD               # from filing summary, not manual
 last_updated: YYYY-MM-DD
 ---
 ```
 
-### 1.4 Form Page (`wiki/forms/{FORM-ID}.md`)
+### 1.5 Rating Rules Sub-Page (`wiki/product-states/{product}-{STATE}/rating-rules/{sub}.md`)
+
+```yaml
+---
+title: "Auto PPA — Alaska — Driving Record Points"
+type: product-state-sub
+product: auto-ppa
+state: AK
+parent: rating-rules
+sub: driving-record-points       # coverage-options | driving-record-points | state-specifics
+source_docs: []
+scope_notes: ""                  # e.g. "AK-specific" or "Multistate rule, applies in AK unchanged"
+last_updated: YYYY-MM-DD
+---
+```
+
+### 1.6 Product-State Endorsements Page (`wiki/product-states/{product}-{STATE}/endorsements.md`)
+
+```yaml
+---
+title: "Auto PPA — Alaska — Endorsements"
+type: product-state
+product: auto-ppa
+state: AK
+page: endorsements
+source_docs: []
+version_current: "1.5"
+last_updated: YYYY-MM-DD
+---
+```
+
+### 1.7 Form Page (`wiki/forms/{FORM-ID}.md`)
 
 ```yaml
 ---
@@ -59,15 +142,15 @@ title: "PPA 0001 07 16 — Personal Automobile Policy"
 type: form
 form_id: PPA-0001-07-16
 product: auto-ppa
-scope: multistate              # multistate | state-specific
-state: null                    # set if scope is state-specific
-edition_date: "07 16"          # MM YY from form number
+scope: multistate
+state: null
+edition_date: "07 16"
 source_docs: []
 last_updated: YYYY-MM-DD
 ---
 ```
 
-### 1.5 Coverage Concept Page (`wiki/coverages/{coverage}.md`)
+### 1.8 Coverage Concept Page (`wiki/coverages/{coverage}.md`)
 
 ```yaml
 ---
@@ -80,7 +163,7 @@ last_updated: YYYY-MM-DD
 ---
 ```
 
-### 1.6 Concept / Terminology Page (`wiki/concepts/{concept}.md`)
+### 1.9 Concept / Terminology Page (`wiki/concepts/{concept}.md`)
 
 ```yaml
 ---
@@ -92,7 +175,7 @@ last_updated: YYYY-MM-DD
 ---
 ```
 
-### 1.7 Comparison Page (`wiki/comparisons/{id}.md`)
+### 1.10 Comparison Page (`wiki/comparisons/{id}.md`)
 
 ```yaml
 ---
@@ -100,36 +183,37 @@ title: "Auto PPA — Alaska vs Alabama"
 type: comparison
 comparison_type: state-vs-state    # state-vs-state | version-diff
 product: auto-ppa
-states: [AK, AL]                   # for state-vs-state
-# OR:
-state: AK                          # for version-diff
-versions: ["1.4", "1.5"]           # for version-diff
+states: [AK, AL]
+# OR for version-diff:
+state: AK
+versions: ["1.4", "1.5"]
 source_docs: []
 generated_date: YYYY-MM-DD
 last_updated: YYYY-MM-DD
 ---
 ```
 
-### 1.8 Wiki Entry (`wiki-entries/{id}.md`)
+### 1.11 Wiki Entry (`wiki-entries/{id}.md`)
 
 ```yaml
 ---
 entry_id: "2026-04-14_auto-ppa_AK_manual_v1.5"
 source_file: "Vault Documents/Auto/AK/Manuals/PAU AK MAN-1.5 - Final.docx"
 product: auto-ppa
-state: AK
-doc_type: manual               # manual | form | endorsement | filing-summary | doi-correspondence
+state: AK                          # "MULTI" for multistate manuals
+doc_type: manual
+scope: state-specific              # multistate | state-specific
 version: "1.5"
-supersedes: "1.4"              # set if this replaces a prior version
+supersedes: "1.4"
 effective_date: YYYY-MM-DD
 serff_tracking: ""
 naic: ""
-approval_status: ""            # approved | pending | withdrawn
+approval_status: ""
 approved_date: YYYY-MM-DD
 ingested_date: YYYY-MM-DD
-absorbed: false                # set to true after /wiki absorb completes
+absorbed: false
 absorbed_date: null
-wiki_pages_updated: []         # populated by /wiki absorb
+wiki_pages_updated: []
 ---
 ```
 
@@ -146,63 +230,53 @@ wiki_pages_updated: []         # populated by /wiki absorb
 
 # {Product Full Name}
 
-Brief one-paragraph description of what this product is and who it covers.
+One paragraph description of what this product covers and who it's for.
 
 ## Coverage Parts
 
-List the major coverage parts (e.g., Part A – Liability, Part B – Medical Payments).
-For each: one sentence on what it covers.
+| Coverage | Description |
+|---|---|
+| Liability | ... |
+| Medical Payments | ... |
+| ...  | ... |
 
 ## Active States
 
-| State | Current Version | Effective Date | Status |
+| State | Version | Effective Date | Status |
 |---|---|---|---|
 | AK | 1.5 | 2021-01-01 | Active |
 
-## Key Forms
+## Multistate Base
 
-- [[PPA-0001-07-16]] — base policy form (multistate)
-- [[PPA-0154-01-20]] — Alaska amendatory endorsement
+See multistate/auto-ppa/ (link only if page exists) for rules that apply by default across all states.
 
-## Related Pages
+## State Pages
 
-- [[coverages/uninsured-motorist]]
-- [[coverages/physical-damage]]
+- [[product-states/auto-ppa-AK/rating-rules]] — Alaska
 ```
 
-### 2.2 State Meta Page Template
+### 2.2 Multistate Base Page Template
 
 ```markdown
 ---
 [frontmatter]
 ---
 
-# {STATE} — Regulatory Metadata
+# {Product} — Multistate — {Page Topic}
 
-## Department of Insurance
+Source: {MULTI manual entry ID}
 
-Name, website if known.
+> These rules apply in all states unless explicitly overridden in a state manual.
+> State-specific overrides are documented in the relevant product-state page.
 
-## Active Products
+## {Section}
 
-| Product | Current Version | SERFF Tracking | Effective Date |
-|---|---|---|---|
-| auto-ppa | 1.5 | SRFF-... | 2021-01-01 |
+{Content}
 
-## Key Statutes Referenced
-
-List statutes that appear across product filings for this state.
-Format: `{Statute ID} — {brief description}` (SOURCE: {entry-id})
-
-## Filing History
-
-Append-only table of filings processed into this wiki.
-
-| Date Ingested | Product | Version | Doc Type | Entry ID |
-|---|---|---|---|---|
+Each rule labeled: `[multistate]` where ambiguity is possible.
 ```
 
-### 2.3 Product-State Rating Rules Template
+### 2.3 Product-State Rating Rules Index Template
 
 ```markdown
 ---
@@ -211,46 +285,113 @@ Append-only table of filings processed into this wiki.
 
 # {Product} — {STATE} — Rating Rules
 
-## Eligibility
+Multistate base: [[multistate/{product}/rating-rules]] (if exists)
+State manual: {manual filename and version}
+Effective date: {from filing summary}
+See also: [[product-states/{product}-{STATE}/endorsements]] | [[states/{STATE}]]
 
-Rules for who/what qualifies for coverage.
-Cite each rule: (SOURCE: {entry-id} §{section})
+## Sub-Pages
 
-## Coverage Options
+- [[rating-rules/coverage-options]] — coverage availability, UM/UIM, FPB, tort options
+- [[rating-rules/driving-record-points]] — point structure, exceptions
+- [[rating-rules/state-specifics]] — state-specific rules, TNP, special vehicles
 
-### {Coverage Part Name}
-- Available limits: ...
-- Mandatory/optional: ...
-- Stacking rules (if applicable): ...
+## State Deviations from Multistate Base
 
-## Mandatory Endorsements
+Summary table of where AK differs from the multistate base:
 
-List all endorsements required for this state.
-Format: `{Form ID} — {description}` (SOURCE: {entry-id} §{section})
-
-## Optional Endorsements
-
-## Underwriting Rules
-
-Key eligibility and risk classification rules.
-
-## Surcharges & Discounts
-
-Rules for rating modifications (NOT rate tables — structure only).
-
-## State-Specific Requirements
-
-What this state requires that differs from the multistate base.
-Each item cites its statutory basis if known.
+| Topic | Multistate Rule | AK Override |
+|---|---|---|
+| Intra-Family Exclusion | Applies | Does not apply |
+| Financial Responsibility Filing | Applies | Does not apply |
+| UM/UIM | Optional offering | Mandatory offering (written rejection required) |
 
 ## Version History
 
 | Version | Effective Date | Key Changes |
 |---|---|---|
-| 1.5 | 2021-01-01 | See [[comparisons/auto-ppa_AK_v1.4-vs-v1.5]] |
+| 1.5 | TBD | First ingested version |
 ```
 
-### 2.4 Version Diff Page Template
+### 2.4 Rating Rules Sub-Page: Coverage Options
+
+```markdown
+---
+[frontmatter]
+---
+
+# {Product} — {STATE} — Coverage Options
+
+Parent: [[product-states/{product}-{STATE}/rating-rules]]
+
+## Policy Form
+
+## Uninsured Motorist Coverage
+[AK-specific or multistate label on each rule]
+
+## Underinsured Motorist Coverage
+
+## First Party Benefits
+
+## Tort Options
+```
+
+### 2.5 Rating Rules Sub-Page: Driving Record Points
+
+```markdown
+---
+[frontmatter]
+---
+
+# {Product} — {STATE} — Driving Record Points
+
+Parent: [[product-states/{product}-{STATE}/rating-rules]]
+
+> Scope: [multistate base | AK-specific override — note which applies]
+
+## Experience Period
+
+## Point Assignment Triggers
+
+## Point Structure Table
+
+## Additional Points
+
+## Exceptions (Points NOT Assigned For)
+```
+
+### 2.6 Rating Rules Sub-Page: State Specifics
+
+```markdown
+---
+[frontmatter]
+---
+
+# {Product} — {STATE} — State-Specific Rules
+
+Parent: [[product-states/{product}-{STATE}/rating-rules]]
+
+Rules in this page are AK-specific and have no multistate equivalent,
+OR are multistate rules that do not apply in AK.
+
+## Rules That Do Not Apply
+
+## State-Specific Additions
+
+## Special Vehicle Classes
+
+## Transportation Network Coverage
+```
+
+### 2.7 Endorsements Page Template
+
+(unchanged — table format is working well)
+
+### 2.8 State Meta Page Template
+
+(unchanged)
+
+### 2.9 Version Diff Page Template
 
 ```markdown
 ---
@@ -260,60 +401,58 @@ Each item cites its statutory basis if known.
 # {Product} — {STATE} — v{old} vs v{new}
 
 Effective date of new version: {date}
-Source: [[wiki-entries/{new-entry-id}]]
+Source: {new-entry-id}
 
 ## Summary of Changes
 
-One-paragraph overview of what changed and why (if stated in the filing).
-
 ## Coverage Changes
-
-### {Coverage Part}
-- **Added:** ...
-- **Removed:** ...
-- **Modified:** ... (was: "X", now: "Y") (SOURCE: {entry-id} §{section})
 
 ## Endorsement Changes
 
-## Eligibility / Underwriting Changes
+## Underwriting / Rating Rule Changes
 
-## Rating Rule Changes
+## Rules Added or Removed
 
-## Unchanged
-
-Note any major areas explicitly confirmed unchanged.
+## Unchanged Areas
 ```
 
 ---
 
 ## 3. Ingest Rules
 
-`/wiki ingest [file-path]` reads a source document and produces a `wiki-entries/{id}.md` file.
-**No wiki pages are modified during ingest.**
+`/wiki ingest [file-path]` reads a source document and produces a `wiki-entries/` file.
+**No wiki pages are modified during ingest — only a `wiki-entries/` file is created.**
 
-### 3.1 What to extract by document type
+### 3.1 Determine Scope from Filename
+
+| Filename pattern | `scope` | `state` |
+|---|---|---|
+| Contains `MULTI` | `multistate` | `MULTI` |
+| Contains state code (e.g. `AK`, `AL`) | `state-specific` | `{STATE}` |
+
+### 3.2 What to Extract by Document Type
 
 **Manual (.docx) — extract:**
 - Eligibility rules
-- Coverage options and available limits (not rate numbers)
-- Mandatory and optional endorsements
-- Underwriting rules
-- Surcharge/discount structure and criteria (not amounts)
+- Coverage options and available limits (rules only, not rate numbers)
+- Mandatory and optional endorsements with form numbers
+- Underwriting rules and risk classification criteria
+- Surcharge/discount structure and criteria (not amounts or factors)
 - State-specific requirements and statutory references
-- Version number and effective date
-- What this version supersedes
+- What this version supersedes (if stated)
+- Effective date (if stated — usually not; use filing summary)
+- For each rule: note whether it is labeled "multistate" or "state-specific" in the source
 
 **Form (.docx) — extract:**
-- All defined terms (from Definitions section)
-- Coverage parts and what each covers
+- All defined terms (term + definition)
+- Coverage parts: name, what it covers, triggers, key limits language
 - Exclusions (complete list)
-- Conditions (duties after loss, appraisal, etc.)
-- Coverage triggers and limits language
-- Form number, edition date
+- Conditions (duties after loss, appraisal, cancellation, etc.)
+- Form number and edition date
 
 **Amendatory Endorsement (.docx) — extract:**
 - Which base form it modifies
-- Exact provisions added, deleted, or replaced
+- Each provision added, deleted, or replaced
 - Statutory basis for each change
 - State and effective date
 
@@ -324,212 +463,164 @@ Note any major areas explicitly confirmed unchanged.
 - Program name
 - Form numbers included
 - Filing type
-- Requested effective date
+- Requested effective date ← **this is the authoritative effective date**
 - Approval status and date
-- Brief summary of what was filed
+
+**Rate Table (.xlsx) — SKIP:**
+Rate table files are not ingested. Inform user: "Rate table files (.xlsx) are excluded per schema. Skipping."
 
 **DOI Correspondence (.pdf) — extract:**
-- Date of correspondence
-- Direction (inbound/outbound)
-- Subject matter
-- Any required changes or conditions on approval
-- Final disposition
+- Date, direction, subject, required changes, disposition
 
-**Do NOT extract from any document:**
-- Raw rate tables, base rates, relativity factors, or premium amounts
-- Individual loss cost factors
-- Specific dollar amounts from rate schedules
+### 3.3 Ingest Order (Required)
 
-### 3.2 Entry ID format
+For each state/product combination, ingest in this order:
+1. Filing summary PDF first (establishes effective date and SERFF metadata)
+2. MULTI manual (establishes multistate base)
+3. State manual (establishes state-specific overrides)
+4. Base form(s)
+5. Amendatory endorsement(s)
+6. DOI correspondence last
 
-`{YYYY-MM-DD}_{product}_{STATE}_{doc-type}_{version}`
+### 3.4 Entry ID Format
 
-Examples:
-- `2026-04-14_auto-ppa_AK_manual_v1.5`
-- `2026-04-14_auto-ppa_AK_form_PPA-0001`
-- `2026-04-14_homeowners-hobp_FL_filing-summary`
+- State-specific: `{YYYY-MM-DD}_{product}_{STATE}_{doc-type}_{version}`
+- Multistate: `{YYYY-MM-DD}_{product}_MULTI_{doc-type}_{version}`
 
-### 3.3 After ingest
+### 3.5 After Ingest
 
 Append to `wiki/_log.md`:
 ```
-[{date}] INGEST | {entry-id} | source: {source-file}
+[{date}] INGEST | {entry-id} | source: {basename} | scope: {multistate|state-specific}
 ```
 
 ---
 
 ## 4. Absorb Rules
 
-`/wiki absorb [entry-id]` reads a wiki entry and integrates it into wiki articles.
-This is the intelligence step — synthesize, don't transcribe.
+`/wiki absorb [entry-id or "all"]` integrates entries into wiki articles.
 
-### 4.1 Process
+### 4.1 Scope-Aware Routing
 
-1. Read the entry file
-2. Check `_absorb_log.json` — if already absorbed, confirm with user before re-absorbing
-3. Scan `_index.md` to identify existing pages this entry should update
-4. For each relevant page:
-   - If page exists: rewrite to incorporate new information, preserving and extending existing content
-   - If page doesn't exist: create from the appropriate template
-5. When `supersedes` is set in the entry frontmatter: create a comparison page if the prior version's page exists
-6. Update `_index.md` with any new pages
-7. Update `_backlinks.json` for any new wikilinks created
-8. Update `_absorb_log.json`: mark entry as absorbed, list all pages touched
-9. Append to `_log.md`
-
-### 4.2 Pages typically touched per document type
-
-| Doc type | Pages typically created/updated |
+| Entry scope | Target pages |
 |---|---|
-| Manual | product-states/{product}-{STATE}/rating-rules.md, product-states/{product}-{STATE}/endorsements.md, states/{STATE}.md, products/{product}.md |
-| Form | forms/{FORM-ID}.md, product-states/{product}-{STATE}/forms.md |
-| Endorsement | forms/{FORM-ID}.md, product-states/{product}-{STATE}/endorsements.md |
-| Filing summary | states/{STATE}.md (filing history table) |
+| `multistate` | `wiki/multistate/{product}/` pages |
+| `state-specific` | `wiki/product-states/{product}-{STATE}/` pages (differences only) |
 
-### 4.3 Anti-cramming rule
+**For state-specific manuals:** Before writing any rule to a state page, check if the same rule exists in `wiki/multistate/{product}/`. If it does and is unchanged in AK, do NOT repeat it on the state page. Instead note it in the "State Deviations" summary table as "same as multistate". Only write rules that differ, are absent from multistate, or are explicitly noted as not applying.
 
-If a page exceeds ~100 lines of body content after absorption:
-- Split off the bloated section into a focused sub-page
-- Replace it with a summary + link to the sub-page
-- Example: `product-states/auto-ppa-AK/rating-rules.md` splits into `rating-rules/uninsured-motorist.md`, `rating-rules/transportation-network.md`
+### 4.2 Pages Touched per Document Type
 
-### 4.4 Anti-thinning rule
+| doc_type / scope | Pages created/updated |
+|---|---|
+| manual / multistate | `wiki/multistate/{product}/rating-rules.md` and sub-pages, `wiki/products/{product}.md` |
+| manual / state-specific | `wiki/product-states/{product}-{STATE}/rating-rules.md` (index) and sub-pages, `wiki/states/{STATE}.md`, `wiki/products/{product}.md` |
+| form | `wiki/forms/{FORM-ID}.md` |
+| endorsement | `wiki/forms/{FORM-ID}.md`, `wiki/product-states/{product}-{STATE}/endorsements.md` |
+| filing-summary | `wiki/states/{STATE}.md` (effective date, SERFF, filing history) |
+| doi-correspondence | `wiki/states/{STATE}.md` (DOI section) |
 
-Every page must have substance. If absorption would result in a page with fewer than 15 lines of body content, either:
-- Merge it into a parent page with a section heading, or
-- Continue building it — mark it as a stub in frontmatter with `stub: true`
+### 4.3 Rating Rules Sub-Page Split (Always Apply)
 
-### 4.5 Checkpoint
+When absorbing a manual (multistate or state-specific), always split rating rules into sub-pages:
+- `rating-rules.md` — index page + state deviations table
+- `rating-rules/coverage-options.md` — coverage parts, UM/UIM, FPB, tort options
+- `rating-rules/driving-record-points.md` — point structure, exceptions
+- `rating-rules/state-specifics.md` — rules not applying, state additions, TNP, special vehicles
 
-After every 15 entries absorbed in a session:
-- Audit newly created pages for narrative coherence vs. raw-data dumps
-- Rebuild `_index.md` entries for all touched pages
-- Check that all new pages have required frontmatter
-- Verify wikilinks resolve (no broken `[[links]]`)
+Never write all rating rule content into a single `rating-rules.md` file.
 
-### 4.6 After absorb
+### 4.4 No Broken Wikilinks Rule
 
-Append to `_log.md`:
-```
-[{date}] ABSORB | {entry-id} | pages updated: {count} | new pages: {list}
-```
+Before writing any `[[wikilink]]`:
+1. Check if the target file exists on disk
+2. If yes: write as `[[path/to/page]]`
+3. If no: write as plain text with note `(page not yet created)` — do NOT create a wikilink
+
+### 4.5 Scope Labels on Rules
+
+Each extracted rule in a state page must be labeled with its scope:
+- `[AK-specific]` — only exists in the AK manual, no multistate equivalent
+- `[multistate, unchanged]` — same as multistate base; note only in deviations table, don't repeat body
+- `[multistate override]` — differs from multistate base; write the AK version and note what changed
+
+### 4.6 Anti-Cramming and Anti-Thinning
+
+Anti-cramming: No single page body exceeds ~100 lines. Split per §4.3 pattern.
+Anti-thinning: Every page must have at least 15 lines of body content. Merge stubs into parent pages.
+
+### 4.7 After Absorb
+
+Update: `_index.md`, `_backlinks.json`, `_absorb_log.json`, entry frontmatter, `_log.md`.
 
 ---
 
 ## 5. Query Rules
 
-`/wiki query "<question>"` answers questions using compiled wiki knowledge.
-**Read-only. Does not modify wiki pages unless explicitly instructed.**
+`/wiki query "<question>"` — read-only.
 
-### 5.1 Process
-
-1. Scan `_index.md` for relevant article titles/descriptions
-2. Check `_backlinks.json` for high-connectivity topics related to the question
-3. Read 3–8 targeted wiki pages (not raw source docs)
-4. Follow wikilinks 2–3 levels deep if needed
-5. Synthesize answer with source citations in format: `(SOURCE: {entry-id} §{section})`
-6. If the answer reveals a gap (important topic with no wiki page), note it
-
-### 5.2 Citation format
-
-Every factual claim in a query answer must be cited:
-- Wiki page citation: `([[wiki/product-states/auto-ppa-AK/rating-rules]])`
-- Source doc citation: `(SOURCE: 2026-04-14_auto-ppa_AK_manual_v1.5 §3.4)`
+1. Scan `_index.md` for relevant pages
+2. Check `_backlinks.json` for high-connectivity topics
+3. Read 3–8 targeted pages; follow wikilinks 2–3 levels deep
+4. For state-specific questions: read both the state page AND the multistate base page, since state pages only document differences
+5. Synthesize with citations: `(SOURCE: {entry-id} §{section})`
+6. Flag gaps: topics not yet in wiki
 
 ---
 
 ## 6. Cleanup Rules
 
-`/wiki cleanup` audits the wiki for health issues.
+`/wiki cleanup` audits the wiki.
 
-### 6.1 Checks to run
+Checks: contradictions, broken wikilinks, orphan pages, stale effective dates,
+missing frontmatter, unabsorbed entries, concrete noun test, stub pages, anti-cramming candidates.
 
-- **Contradictions**: same rule stated differently on two pages for the same state/product
-- **Orphan pages**: pages not linked from `_index.md` or any other page
-- **Stale effective dates**: effective dates in the past with no newer version ingested
-- **Missing frontmatter fields**: required YAML fields absent
-- **Broken wikilinks**: `[[links]]` that point to non-existent pages
-- **Concrete noun test**: scan all pages for entities mentioned 3+ times without their own page (people, forms, statutes, concepts) — flag as candidates for new pages
-- **Stub pages**: pages marked `stub: true` that have been stubs for more than one ingest cycle
+**Additional check for multistate model:**
+- State pages that repeat rules verbatim from the multistate base (should be removed — link instead)
+- State pages that don't have a corresponding multistate base page (ingest order violation)
 
-### 6.2 Output
-
-Produce a `wiki/_cleanup_report_{date}.md` listing all issues found, categorized by severity:
-- **Critical**: contradictions, broken links
-- **Warning**: orphans, stale dates, missing frontmatter
-- **Info**: stub pages, concrete noun candidates
-
-Append to `_log.md`:
-```
-[{date}] CLEANUP | issues found: {count} | critical: {n} | warnings: {n}
-```
+Produces: `wiki/_cleanup_report_{date}.md`
 
 ---
 
 ## 7. Writing Standards
 
-### Voice and tone
+Wikipedia-style: flat, factual, precise. No editorial voice.
 
-Write like an insurance compliance reference manual: flat, factual, precise.
+Every rule ends with source citation: `(SOURCE: {entry-id} §{section})`
 
-**Avoid:**
-- Editorial voice: "notably", "importantly", "interestingly"
-- Peacock words: "comprehensive", "robust", "innovative"
-- Progressive narrative: "would go on to", "eventually"
-- Em dashes for decoration
+Scope labels on every rule in state pages: `[AK-specific]`, `[multistate, unchanged]`, `[multistate override]`.
 
-**Use:**
-- Active, declarative sentences
-- Present tense for current rules, past tense for historical facts
-- Exact form numbers, section references, and statutory citations
+Thematic organization — not chronological.
 
-### Structure
+### Length Targets
 
-Organize thematically, not chronologically. Section headers describe the topic, not the date.
-
-- Wrong: `## March 2021 Update`
-- Right: `## Transportation Network Coverage`
-
-### Length targets
-
-| Page type | Target length |
+| Page type | Target |
 |---|---|
 | Product overview | 40–60 lines |
+| Multistate base sub-page | 40–80 lines |
 | State meta | 20–40 lines |
-| Product-state rating rules | 60–100 lines |
-| Product-state forms | 40–80 lines |
+| Rating rules index | 20–40 lines |
+| Rating rules sub-page | 40–80 lines |
+| Endorsements | 40–80 lines |
 | Form page | 40–80 lines |
 | Coverage concept | 40–80 lines |
-| Concept/terminology | 20–40 lines |
 | Version diff | 30–60 lines |
 | State comparison | 40–80 lines |
 
-### Source citations
-
-Every factual rule or provision stated in the wiki must end with a source citation:
-```
-Coverage must be offered at limits matching the liability limits. (SOURCE: 2026-04-14_auto-ppa_AK_manual_v1.5 §3.4)
-```
-
 ---
 
-## 8. Index and Log Formats
+## 8. System File Formats
 
-### `_index.md` entry format
-
-```markdown
-## Product-State Pages
-
-- [[product-states/auto-ppa-AK/rating-rules]] — Auto PPA Alaska rating rules, eligibility, endorsements (v1.5, eff. 2021-01-01)
-- [[product-states/auto-ppa-AK/forms]] — Auto PPA Alaska policy forms and endorsements
+### `_index.md` Entry Format
 ```
+- [[path/to/page]] — one-line description (version, eff. date if applicable)
+```
+Only list pages that actually exist on disk.
 
-### `_log.md` entry format
-
+### `_log.md` Entry Format
 ```
 [YYYY-MM-DD] {OPERATION} | {details}
 ```
-
 Operations: `INIT`, `INGEST`, `ABSORB`, `QUERY`, `CLEANUP`
-
-Never edit past log entries. Append only.
+Append only — never edit past entries.

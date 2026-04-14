@@ -21,21 +21,43 @@ Read the relevant entry file(s) from `wiki-entries/`. For each entry:
 ## Step 2: For each entry, determine which wiki pages to create or update
 
 Read `wiki/_index.md` to identify existing pages for this product/state.
+Read `schema.md` sections 4.1–4.5 for scope-aware routing rules.
 
-Standard pages per entry type (from schema.md §4.2):
+**Scope routing (from schema.md §4.1):**
 
-| doc_type | Pages to create/update |
+| Entry scope | Target pages |
 |---|---|
-| manual | `wiki/product-states/{product}-{STATE}/rating-rules.md`, `wiki/product-states/{product}-{STATE}/endorsements.md`, `wiki/states/{STATE}.md`, `wiki/products/{product}.md` |
-| form | `wiki/forms/{FORM-ID}.md`, `wiki/product-states/{product}-{STATE}/forms.md` |
-| endorsement | `wiki/forms/{FORM-ID}.md`, `wiki/product-states/{product}-{STATE}/endorsements.md` |
-| filing-summary | `wiki/states/{STATE}.md` (filing history table only) |
-| doi-correspondence | `wiki/states/{STATE}.md` (DOI correspondence section) |
+| `multistate` | `wiki/multistate/{product}/` — rating-rules index + sub-pages, endorsements |
+| `state-specific` | `wiki/product-states/{product}-{STATE}/` — differences from multistate only |
 
-Also check: do any coverage concepts mentioned deserve a `wiki/coverages/` page?
+**For state-specific manuals:**
+Before writing any rule, check `wiki/multistate/{product}/` for the same rule.
+- If multistate page exists and rule is unchanged: note in deviations table as `[multistate, unchanged]`, do NOT write full rule body
+- If multistate page does not exist yet: write the full rule body and flag it as scope TBD
+- If rule differs from multistate: write AK version labeled `[multistate override]`
+- If rule is AK-only (no multistate equivalent): write full body labeled `[AK-specific]`
+
+**Rating rules always split into sub-pages (schema.md §4.3):**
+- `rating-rules.md` — index + deviations table
+- `rating-rules/coverage-options.md`
+- `rating-rules/driving-record-points.md`
+- `rating-rules/state-specifics.md`
+
+**Standard pages per entry type:**
+
+| doc_type / scope | Pages created/updated |
+|---|---|
+| manual / multistate | `wiki/multistate/{product}/rating-rules.md` + sub-pages, `wiki/products/{product}.md` |
+| manual / state-specific | `wiki/product-states/{product}-{STATE}/rating-rules.md` + sub-pages, `wiki/states/{STATE}.md`, `wiki/products/{product}.md` |
+| form | `wiki/forms/{FORM-ID}.md` |
+| endorsement | `wiki/forms/{FORM-ID}.md`, `wiki/product-states/{product}-{STATE}/endorsements.md` |
+| filing-summary | `wiki/states/{STATE}.md` (effective date, SERFF, filing history) |
+| doi-correspondence | `wiki/states/{STATE}.md` (DOI section) |
+
+Also check: do any coverage concepts deserve a `wiki/coverages/` page?
 Do any terms defined in the entry lack a `wiki/concepts/` page?
 
-If `supersedes` is set in the entry AND a prior version's page exists: create a version diff page at
+If `supersedes` is set AND a prior version's page exists: create a version diff page at
 `wiki/comparisons/{product}_{STATE}_v{old}-vs-v{new}.md`
 
 ---
@@ -59,10 +81,13 @@ Set frontmatter fields including `source_docs: ["{entry-id}"]`.
 - Every factual rule or provision ends with: `(SOURCE: {entry-id} §{section-if-known})`
 - No editorial voice, no peacock words
 
+**No broken wikilinks** (schema.md §4.4):
+Before writing any `[[wikilink]]`, verify the target file exists on disk.
+If it does not exist, write as plain text with note `(page not yet created)` instead of a wikilink.
+
 **Anti-cramming** (schema.md §4.3):
-If any page would exceed ~100 lines of body content after this absorption:
-- Split the bloated section into a focused sub-page
-- Replace with a summary + wikilink to the sub-page
+Rating rules always go into sub-pages — never into a single file.
+For other page types: if body exceeds ~100 lines, split into focused sub-pages.
 
 **Anti-thinning** (schema.md §4.4):
 Every page must have at least 15 lines of body content. No stubs without `stub: true` in frontmatter.

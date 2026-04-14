@@ -14,7 +14,9 @@ From the path `$ARGUMENTS`, determine:
   - `Auto/` → `auto-ppa`
   - `Homeowners/` or `FL/` → `homeowners-hobp`
   - `Motor Truck Cargo/` → `motor-truck-cargo`
-- **state**: 2-letter folder name under the product (AK, AL, FL, etc.)
+- **scope and state**: check the filename
+  - Filename contains `MULTI` → `scope: multistate`, `state: MULTI`
+  - Filename contains a state code (e.g. `AK`, `AL`) → `scope: state-specific`, `state: {STATE}`
 - **doc_type**: from the subfolder and filename:
   - `Forms/` folder + base policy filename (e.g. `PPA 0001`, `HO 0003`, `CIM 7002`) → `form`
   - `Forms/` folder + amendatory/endorsement filename → `endorsement`
@@ -87,11 +89,14 @@ Read `schema.md` section 3.1 for the full extraction rules. Summary:
 
 ## Step 4: Generate the entry ID
 
-Format: `{YYYY-MM-DD}_{product}_{STATE}_{doc-type}_{version}`
+Format:
+- State-specific: `{YYYY-MM-DD}_{product}_{STATE}_{doc-type}_{version}`
+- Multistate: `{YYYY-MM-DD}_{product}_MULTI_{doc-type}_{version}`
 
 Use today's date. Examples:
 - `2026-04-14_auto-ppa_AK_manual_v1.5`
-- `2026-04-14_homeowners-hobp_AK_form_PPA-0001-07-16`
+- `2026-04-14_auto-ppa_MULTI_manual_v01-21`
+- `2026-04-14_homeowners-hobp_AK_form_HO-0003-09-20`
 - `2026-04-14_motor-truck-cargo_AL_endorsement_CIM-2001-08-15`
 - `2026-04-14_auto-ppa_AK_filing-summary`
 

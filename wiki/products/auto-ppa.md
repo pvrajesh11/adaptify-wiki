@@ -9,38 +9,34 @@ source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5"]
 
 # Personal Automobile (Auto PPA)
 
-The Personal Automobile product (PPA) provides personal auto coverage under base form **PA 0001 — Personal Auto Policy**. It covers private passenger vehicles and may be endorsed for a range of additional coverages and special vehicle types.
+The Personal Automobile product (PPA) provides personal auto coverage under base form PA 0001 — Personal Auto Policy. It covers private passenger vehicles and may be endorsed for a range of additional coverages and special vehicle types.
 
 ## Coverage Parts
 
-PA 0001 may be used to provide any combination of:
+| Coverage | Description |
+|---|---|
+| Liability | Bodily injury and property damage liability |
+| Medical Payments | Medical expenses for insureds injured in an auto accident |
+| Uninsured Motorist | Compensatory damages from uninsured drivers |
+| Underinsured Motorist | Compensatory damages from underinsured drivers |
+| Physical Damage | Collision and comprehensive coverage for the vehicle |
 
-- **Liability Coverage** — bodily injury and property damage liability
-- **Medical Payments Coverage** — medical expenses for insureds
-- **Uninsured Motorist Coverage** — compensatory damages from uninsured drivers (see [[coverages/uninsured-motorist]])
-- **Underinsured Motorist Coverage** — compensatory damages from underinsured drivers (see [[coverages/underinsured-motorist]])
-- **Physical Damage Coverage** — collision and comprehensive
+Optional endorsable coverages: First Party Benefits, Extraordinary Medical Benefits, Pedestrian Basic First Party Benefits, Transportation Network / Ride Sharing.
 
-Optional endorsable coverages:
-- First Party Benefits Coverage
-- Extraordinary Medical Benefits Coverage
-- Pedestrian Basic First Party Benefits Coverage
-- Transportation Network / Ride Sharing Coverage
+## Multistate Base
+
+Multistate base pages (from MULTI PAU Manual 01 21.docx) not yet ingested.
+State pages currently document all rules — deviations table will be completed after multistate ingest.
 
 ## Active States
 
-| State | Manual Version | Effective Date | Status |
-|---|---|---|---|
-| AK | 1.5 | TBD | Active |
+| State | Manual Version | Effective Date | Rating Rules | Endorsements |
+|---|---|---|---|---|
+| AK | 1.5 | TBD | [[product-states/auto-ppa-AK/rating-rules]] | [[product-states/auto-ppa-AK/endorsements]] |
 
 ## Key Forms
 
-- [[forms/PA-0001]] — Personal Auto Policy (base form, multistate)
-- [[forms/PA-0154]] — Amendatory Endorsement — Alaska (mandatory)
-- [[forms/PA-9901]] — Insurance Consultation Services Exemption Act Notice (mandatory, AK)
-- [[forms/PA-9902]] — Limited Tort Alternative Information Notice — Alaska (mandatory, AK)
+PA 0001 — Personal Auto Policy (base form, multistate) — form page not yet created
+PA 0154 — Amendatory Endorsement — Alaska (mandatory) — form page not yet created
 
-## State Pages
-
-- [[product-states/auto-ppa-AK/rating-rules]] — Alaska rating rules and underwriting
-- [[product-states/auto-ppa-AK/endorsements]] — Alaska endorsements (mandatory and optional)
+Forms will be linked here once ingested from Vault Documents/Auto/AK/Forms/.
