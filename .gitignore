@@ -1,0 +1,8 @@
+.DS_Store
+
+# Source documents — never commit these to the wiki repo
+# They live in ~/claude/adaptify/Vault Documents/
+*.xlsx
+*.docx
+*.pdf
+*.xls
