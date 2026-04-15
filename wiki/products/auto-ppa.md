@@ -2,9 +2,9 @@
 title: "Personal Automobile (Auto PPA)"
 type: product
 product: auto-ppa
-states_active: [AK]
+states_active: [AK, AL]
 last_updated: 2026-04-14
-source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5"]
+source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5", "2026-04-14_auto-ppa_AL_manual_v1.5"]
 ---
 
 # Personal Automobile (Auto PPA)
@@ -33,10 +33,10 @@ State pages currently document all rules — deviations table will be completed 
 | State | Manual Version | Effective Date | Rating Rules | Endorsements |
 |---|---|---|---|---|
 | AK | 1.5 | 2026-01-01 | [AK — Rating Rules](../product-states/auto-ppa-AK/rating-rules.md) | [AK — Endorsements](../product-states/auto-ppa-AK/endorsements.md) |
+| AL | 1.5 | 2026-01-01 | [AL — Rating Rules](../product-states/auto-ppa-AL/rating-rules.md) | [AL — Endorsements](../product-states/auto-ppa-AL/endorsements.md) |
 
 ## Key Forms
 
 PA 0001 — Personal Auto Policy (base form, multistate) — form page not yet created
 PA 0154 — Amendatory Endorsement — Alaska (mandatory) — form page not yet created
-
-Forms will be linked here once ingested from Vault Documents/Auto/AK/Forms/.
+[PPA 0101 03 18](../forms/PPA-0101-03-18.md) — Amendatory Endorsement — Alabama (mandatory)

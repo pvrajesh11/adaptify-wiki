@@ -53,6 +53,16 @@ When multiple violations from one occurrence: use only the highest point-value v
 >
 > See [AK — Driving Record Points](../../../product-states/auto-ppa-AK/rating-rules/driving-record-points.md) for full AK table.
 
+> **AL overrides to this table (identical to AK overrides):**
+> - Minor Violation (0–<1yr): **3** (vs multistate 2)
+> - Major Violation (2–<3yr): **3** (vs multistate 2)
+> - Major Violation add'l surcharge: **1** (vs multistate 2)
+> - At-Fault Accident (1–<2yr): **2** (vs multistate 3)
+> - At-Fault Accident (2–<3yr): **1** (vs multistate 2)
+> - At-Fault Accident add'l surcharge: **1** (vs multistate 0)
+>
+> See [AL — Driving Record Points](../../../product-states/auto-ppa-AL/rating-rules/driving-record-points.md) for full AL table.
+
 ---
 
 ## Additional Points
@@ -84,6 +94,7 @@ When multiple violations from one occurrence: use only the highest point-value v
 Applied to any driver for whom financial responsibility must be filed under state law on inception or renewal date. (SOURCE: 2026-04-14_auto-ppa_MULTI_manual_v01-21 §6.4.2)
 
 > **AK override:** Rule does not apply in Alaska.
+> **AL override:** Rule does not apply in Alabama.
 
 ---
 
