@@ -10,9 +10,9 @@ An LLM-maintained knowledge base covering rating rules, coverages, forms, and en
 
 | Product | States |
 |---|---|
-| Auto PPA | AK, AL *(in progress)* |
-| Homeowners HOBP | AK, AL, FL *(in progress)* |
-| Motor Truck Cargo | AK, AL *(in progress)* |
+| Auto PPA | AK, AL |
+| Homeowners HOBP | AK, AL, FL |
+| Motor Truck Cargo | AK, AL |
 
 ## Quick Links
 
