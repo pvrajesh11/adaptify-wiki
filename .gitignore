@@ -6,3 +6,6 @@
 *.docx
 *.pdf
 *.xls
+
+# Obsidian local config — keep out of repo
+wiki/.obsidian/
