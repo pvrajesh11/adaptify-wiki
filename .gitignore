@@ -10,3 +10,11 @@
 # Obsidian local config — keep out of repo
 wiki/.obsidian/
 Adaptify/
+
+# Retrieval build artifacts
+tools/.cache/
+tools/__pycache__/
+
+# Local-only wiki artifacts (regenerable / Obsidian cruft)
+wiki/_schema_audit.md
+wiki/ins/

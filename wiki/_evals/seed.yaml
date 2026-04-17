@@ -1,0 +1,115 @@
+# Wiki retrieval eval — seed set
+#
+# Purpose: regression benchmark for any retrieval change (chunking, embeddings,
+# hybrid weights, reranker). Every entry has a question, the expected intent,
+# and the wiki pages that SHOULD surface in the top-k retrieval.
+#
+# Scoring (planned):
+#   - recall@k on `must_cite`   (primary metric; every must-cite must appear in top-k)
+#   - recall@k on `optional_cite` (secondary; nice-to-have)
+#   - answer_hint is for human spot-check of generated answers, not automated
+#
+# Paths are relative to wiki/ root.
+#
+# Keep this file human-editable. No auto-generation.
+
+version: 1
+generated: 2026-04-16
+coverage_notes: "10-question seed covering 4 intents across 3 products and 3 states. Does not exercise: concept pages (wiki/concepts/ is empty), comparison pages (wiki/comparisons/ is empty), DOI correspondence."
+
+questions:
+  - id: q001
+    intent: factual-lookup
+    question: "What does PPA 0154 01 20 do?"
+    must_cite:
+      - forms/PPA-0154-01-20.md
+    optional_cite:
+      - states/AK.md
+      - product-states/auto-ppa-AK/endorsements.md
+    answer_hint: "Alaska Amendatory Endorsement to PPA 0001; four amendments: domestic violence exception in Part D, subrogation, 30-day renewal notice, Alaska Suit Against Us clause."
+
+  - id: q002
+    intent: state-override
+    question: "Does the intra-family exclusion apply in Alaska for Auto PPA?"
+    must_cite:
+      - product-states/auto-ppa-AK/rating-rules/state-specifics.md
+    optional_cite:
+      - multistate/auto-ppa/rating-rules/coverage-modifications.md
+      - multistate/auto-ppa/rating-rules.md
+    answer_hint: "No — intra-family exclusion does not apply in Alaska; it is a state-specific exception to the multistate baseline."
+
+  - id: q003
+    intent: comparison
+    question: "How do Alaska, Alabama, and Florida differ on the innocent-insured / abuse exception for Homeowners HOBP?"
+    must_cite:
+      - multistate/homeowners-hobp/rating-rules.md
+    optional_cite:
+      - forms/HO-0854-02-21.md
+      - forms/HO-0801-09-20.md
+      - forms/HO-0809-02-22.md
+    answer_hint: "Multistate baseline has no exception. AK: domestic violence exception via HO 0854 02 21 (AS 18.66). AL: abuse exception via HO 0801 09 20 (Alabama Protection From Abuse Act). FL: domestic violence exception via HO 0809 02 22."
+
+  - id: q004
+    intent: reverse-lookup
+    question: "Which pages reference the Alaska domestic violence statute AS 18.66?"
+    must_cite:
+      - forms/HO-0854-02-21.md
+      - forms/CIM-2003-06-20.md
+    optional_cite:
+      - multistate/homeowners-hobp/rating-rules.md
+      - multistate/motor-truck-cargo/rating-rules.md
+    answer_hint: "HO 0854 02 21 (HOBP Alaska amendatory), CIM 2003 06 20 (MTC Alaska amendatory); both invoke AS 18.66 for domestic violence / innocent-insured exceptions."
+
+  - id: q005
+    intent: factual-lookup
+    question: "Which endorsement amends PPA 0001 for Alabama?"
+    must_cite:
+      - forms/PPA-0101-03-18.md
+    optional_cite:
+      - product-states/auto-ppa-AL/endorsements.md
+    answer_hint: "PPA 0101 03 18 — Alabama Amendatory Endorsement. Analogous to PPA 0154 01 20 for Alaska; substitutes Alabama Protection From Abuse Act for the Alaska DV statute."
+
+  - id: q006
+    intent: factual-lookup
+    question: "What does Part D of the Personal Auto Policy cover?"
+    must_cite:
+      - forms/PPA-0001-07-16.md
+    optional_cite: []
+    answer_hint: "Part D — Coverage for Damage to Your Auto (physical damage): collision and other-than-collision coverage for the insured vehicle, including transportation expenses."
+
+  - id: q007
+    intent: factual-lookup
+    question: "What is the difference between Per Vehicle and Gross Receipts rating methods in Motor Truck Cargo?"
+    must_cite:
+      - multistate/motor-truck-cargo/rating-rules/rating-factors.md
+    optional_cite:
+      - products/motor-truck-cargo.md
+      - multistate/motor-truck-cargo/rating-rules/coverage-options.md
+    answer_hint: "Two rating methods available in MTC: Per Vehicle (rate each insured truck individually) vs Gross Receipts (rate based on the insured's annual gross receipts). Selection criteria and eligibility differ."
+
+  - id: q008
+    intent: definition
+    question: "Who is a 'named insured' under the HOBP policy?"
+    must_cite:
+      - forms/HO-0003-09-20.md
+    optional_cite: []
+    answer_hint: "Named Insured is the person(s) listed in the declarations; their resident spouse and resident household members are covered as 'insureds.' Exact wording from HO 0003 09 20 definitions section."
+
+  - id: q009
+    intent: factual-lookup
+    question: "Is HO 0801 09 20 mandatory in Alabama?"
+    must_cite:
+      - forms/HO-0801-09-20.md
+    optional_cite:
+      - product-states/homeowners-hobp-AL/endorsements.md
+    answer_hint: "Yes — mandatory in Alabama per the 01/01/2026 HOBP filing. (Note the open ⚠️ flag about HO 0801 vs HO 0854 references in earlier state pages.)"
+
+  - id: q010
+    intent: metadata
+    question: "What is the effective date of the current Florida Homeowners HOBP filing (12/15 edition)?"
+    must_cite:
+      - product-states/homeowners-hobp-FL/rating-rules.md
+    optional_cite:
+      - states/FL.md
+      - products/homeowners-hobp.md
+    answer_hint: "2026-01-01. Version 12 15 (version history 01 11 → 03 13 → 12 13 → 01 15 → 12 15)."

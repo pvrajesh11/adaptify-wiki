@@ -25,6 +25,10 @@ exclude:
   - wiki/_log.md
   - wiki/_absorb_log.json
   - wiki/_backlinks.json
+  - wiki/_schema_audit.md
+  - wiki/_evals/
+  - wiki/ins/
+  - tools/
   - CLAUDE.md
   - schema.md
   - Gemfile
