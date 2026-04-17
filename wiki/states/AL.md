@@ -1,5 +1,6 @@
 ---
 title: "Alabama — State Regulatory Metadata"
+summary: "Alabama regulatory metadata: Department of Insurance contact, active products (Auto PPA, Homeowners HOBP, Motor Truck Cargo), and statutory references (Alabama Protection From Abuse Act, Act 164)."
 type: state-meta
 state: AL
 products_active: [auto-ppa, homeowners-hobp, motor-truck-cargo]
@@ -8,6 +9,7 @@ statutory_refs:
   - "Act 164 — Transportation network driver coverage requirements"
   - "Alabama Protection From Abuse Act — Innocent insured protection and abuse subrogation (auto-ppa, homeowners-hobp, motor-truck-cargo)"
   - "75 Pa. C.S. § 1535 — (appears in driving record point rules; flagged as possible document artifact — verify)"
+citations: ["Alabama Protection From Abuse Act", "Alabama Act 164"]
 last_updated: 2026-04-14
 ---
 

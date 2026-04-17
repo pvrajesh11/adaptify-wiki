@@ -1,5 +1,6 @@
 ---
 title: "Florida — State Regulatory Metadata"
+summary: "Florida regulatory metadata: Florida Office of Insurance Regulation (FLOIR) contact, active products (Homeowners HOBP), and statutory references (Florida Protection From Abuse Act, Fla. Stat. §95.11)."
 type: state-meta
 state: FL
 products_active: [homeowners-hobp]
@@ -9,6 +10,7 @@ statutory_refs:
   - "Florida Protection From Abuse Act — protective orders; referenced in HO 0809 02 22 innocent insured provision"
   - "Florida statute (abuse definition) — defines abuse for innocent insured exception in homeowners policy"
   - "Florida Statute §95.11 — statute of limitations for written contracts; governs Suit Against Us period for property coverages"
+citations: ["Florida Protection From Abuse Act", "Fla. Stat. §95.11"]
 last_updated: 2026-04-14
 ---
 

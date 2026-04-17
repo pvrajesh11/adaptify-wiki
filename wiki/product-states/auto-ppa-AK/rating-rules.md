@@ -1,9 +1,11 @@
 ---
 title: "Auto PPA — Alaska — Rating Rules"
+summary: "Index page for Alaska Auto PPA rating rules. Lists sub-pages (coverage options, driving record points, state-specific rules) and summarizes AK deviations from the multistate base."
 type: product-state
 product: auto-ppa
 state: AK
 page: rating-rules
+scope: state-override
 multistate_base: "multistate/auto-ppa"
 source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5"]
 version_current: "1.5"

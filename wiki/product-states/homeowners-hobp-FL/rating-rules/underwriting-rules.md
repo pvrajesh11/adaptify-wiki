@@ -1,10 +1,12 @@
 ---
 title: "Homeowners HOBP — Florida — Underwriting Rules"
+summary: "Florida Homeowners HOBP underwriting rules: follows the multistate base for eligibility and ineligible risks, plus the FL-specific optional owner occupancy requirement (HO 2003 / Rule 4.19)."
 type: product-state-sub
 product: homeowners-hobp
 state: FL
 parent: rating-rules
 sub: underwriting-rules
+scope: state-override
 multistate_base: "multistate/homeowners-hobp"
 source_docs:
   - "2026-04-14_homeowners-hobp_FL_state-pages_v1215"

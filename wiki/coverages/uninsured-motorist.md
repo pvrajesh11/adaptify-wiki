@@ -1,9 +1,11 @@
 ---
 title: "Uninsured Motorist Coverage"
+summary: "Auto PPA Uninsured Motorist (UM) coverage: mandatory offering rules, written-rejection waiver, and stacked vs non-stacked election. Includes Alaska-specific detail."
 type: coverage
 coverage_id: uninsured-motorist
 products: [auto-ppa]
 states_with_variations: [AK]
+scope: cross-product
 last_updated: 2026-04-14
 ---
 

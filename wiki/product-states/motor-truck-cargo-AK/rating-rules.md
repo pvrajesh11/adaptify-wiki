@@ -1,9 +1,11 @@
 ---
 title: "Motor Truck Cargo — Alaska — Rating Rules"
+summary: "Index page for Alaska Motor Truck Cargo rating rules. Rating/underwriting follow the multistate base unchanged; AK deviations are form-level only (CIM 2003 06 20)."
 type: product-state
 product: motor-truck-cargo
 state: AK
 page: rating-rules
+scope: state-override
 multistate_base: "multistate/motor-truck-cargo"
 source_docs:
   - "2026-04-14_motor-truck-cargo_AK_filing-summary"

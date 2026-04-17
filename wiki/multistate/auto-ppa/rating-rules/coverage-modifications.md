@@ -1,8 +1,10 @@
 ---
 title: "Auto PPA — Multistate — Coverage Modifications & Additional Options"
+summary: "Multistate Auto PPA coverage modifications and additional options under Rules 8, 9, and 10. Covers coverage modifications (Rule 8), optional coverage add-ons (Rule 9), and exclusions/limitations (Rule 10)."
 type: multistate
 product: auto-ppa
 page: coverage-modifications
+scope: multistate
 source_docs: ["2026-04-14_auto-ppa_MULTI_manual_v01-21"]
 version_current: "01 21"
 last_updated: 2026-04-14

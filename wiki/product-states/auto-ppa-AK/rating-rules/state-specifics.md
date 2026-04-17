@@ -1,11 +1,14 @@
 ---
 title: "Auto PPA — Alaska — State-Specific Rules"
+summary: "Alaska-only Auto PPA rules: transportation network (Act 164) Phase I/II/III minimums, domestic violence innocent-insured exception, 30-day renewal notice, suit limitation, and special vehicle handling."
 type: product-state-sub
 product: auto-ppa
 state: AK
 parent: rating-rules
 sub: state-specifics
+scope: state-specific
 source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5", "2026-04-14_auto-ppa_AK_form_PPA-0154-01-20"]
+citations: ["AS 18.66", "Alaska Act 164"]
 last_updated: 2026-04-14
 ---
 

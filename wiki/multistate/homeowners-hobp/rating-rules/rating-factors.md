@@ -1,8 +1,10 @@
 ---
 title: "Homeowners HOBP — Multistate — Rating Factors"
+summary: "Multistate Homeowners HOBP rating factors: risk characteristic factors, deductibles, and construction/roof/fire-protection definitions drawn from MULTI HOBP 0111 §5–§7."
 type: multistate
 product: homeowners-hobp
 page: rating-factors
+scope: multistate
 source_docs: ["2026-04-14_homeowners-hobp_MULTI_manual_v0111"]
 version_current: "01 11"
 last_updated: 2026-04-14

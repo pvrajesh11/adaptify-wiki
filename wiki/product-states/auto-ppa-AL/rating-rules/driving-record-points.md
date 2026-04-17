@@ -1,10 +1,12 @@
 ---
 title: "Auto PPA — Alabama — Driving Record Points"
+summary: "Alabama Auto PPA driving record point structure. Overrides the multistate base in the same five cells as AK and documents AL-specific exceptions."
 type: product-state-sub
 product: auto-ppa
 state: AL
 parent: rating-rules
 sub: driving-record-points
+scope: state-override
 source_docs: ["2026-04-14_auto-ppa_AL_manual_v1.5"]
 scope_notes: "Point structure differs from multistate base in 5 cells — same overrides as AK. See deviation table below."
 last_updated: 2026-04-14

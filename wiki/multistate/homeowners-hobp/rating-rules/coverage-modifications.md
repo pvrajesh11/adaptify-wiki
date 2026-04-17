@@ -1,8 +1,10 @@
 ---
 title: "Homeowners HOBP — Multistate — Coverage Modifications"
+summary: "Multistate Homeowners HOBP coverage modifications: optional property coverages, liability add-ons, and farm-related coverages drawn from MULTI HOBP 0111 §8–§12."
 type: multistate
 product: homeowners-hobp
 page: coverage-modifications
+scope: multistate
 source_docs: ["2026-04-14_homeowners-hobp_MULTI_manual_v0111"]
 version_current: "01 11"
 last_updated: 2026-04-14

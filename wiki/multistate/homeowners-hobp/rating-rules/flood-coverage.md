@@ -1,8 +1,10 @@
 ---
 title: "Homeowners HOBP — Multistate — Flood Coverage"
+summary: "Multistate Homeowners HOBP flood coverage supplement. Documents HO 2710 endorsement, the limit hierarchy, and the 30-day waiting period rules from the Rev 06 21 flood supplement."
 type: multistate
 product: homeowners-hobp
 page: flood-coverage
+scope: multistate
 source_docs: ["2026-04-14_homeowners-hobp_MULTI_flood-supplement_v06-21"]
 version_current: "Rev 06 21"
 last_updated: 2026-04-14

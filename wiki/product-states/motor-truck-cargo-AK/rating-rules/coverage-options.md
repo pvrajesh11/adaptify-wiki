@@ -1,9 +1,11 @@
 ---
 title: "Motor Truck Cargo — Alaska — Coverage Options"
+summary: "Alaska Motor Truck Cargo coverage options. All rating methods, commodity classification, and coverage options follow the multistate base unchanged."
 type: product-state
 product: motor-truck-cargo
 state: AK
 page: coverage-options
+scope: state-override
 multistate_base: "multistate/motor-truck-cargo"
 source_docs:
   - "2026-04-14_motor-truck-cargo_AK_filing-summary"

@@ -1,10 +1,12 @@
 ---
 title: "Homeowners HOBP — Alaska — Coverage Options"
+summary: "Alaska Homeowners HOBP coverage options overriding the multistate base, focused on AK mandatory endorsements attached to the policy."
 type: product-state-sub
 product: homeowners-hobp
 state: AK
 parent: rating-rules
 sub: coverage-options
+scope: state-override
 multistate_base: "multistate/homeowners-hobp"
 source_docs:
   - "2026-04-14_homeowners-hobp_AK_state-pages_v1215"

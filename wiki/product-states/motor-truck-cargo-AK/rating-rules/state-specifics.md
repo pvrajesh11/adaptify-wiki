@@ -1,12 +1,15 @@
 ---
 title: "Motor Truck Cargo — Alaska — State-Specific Rules"
+summary: "Alaska-only Motor Truck Cargo rules introduced by CIM 2003 06 20: domestic violence exception to the Criminal Acts exclusion, subrogation carve-out for DV victims, and Suit Against Us statutory period."
 type: product-state
 product: motor-truck-cargo
 state: AK
 page: state-specifics
+scope: state-specific
 multistate_base: "multistate/motor-truck-cargo"
 source_docs:
   - "2026-04-14_motor-truck-cargo_AK_form_CIM-2003-06-20"
+citations: ["AS 18.66"]
 last_updated: 2026-04-14
 ---
 

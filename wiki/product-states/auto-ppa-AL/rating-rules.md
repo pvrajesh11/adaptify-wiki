@@ -1,9 +1,11 @@
 ---
 title: "Auto PPA — Alabama — Rating Rules"
+summary: "Index page for Alabama Auto PPA rating rules. Lists sub-pages (coverage options, driving record points, state-specific rules) and summarizes AL deviations from the multistate base."
 type: product-state
 product: auto-ppa
 state: AL
 page: rating-rules
+scope: state-override
 multistate_base: "multistate/auto-ppa"
 source_docs: ["2026-04-14_auto-ppa_AL_manual_v1.5"]
 version_current: "1.5"

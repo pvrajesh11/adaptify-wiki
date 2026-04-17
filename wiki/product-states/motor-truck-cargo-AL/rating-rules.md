@@ -1,9 +1,11 @@
 ---
 title: "Motor Truck Cargo — Alabama — Rating Rules"
+summary: "Index page for Alabama Motor Truck Cargo rating rules. Rating/underwriting follow the multistate base unchanged; AL deviations are form-level only (CIM 2001 08 15)."
 type: product-state
 product: motor-truck-cargo
 state: AL
 page: rating-rules
+scope: state-override
 multistate_base: "multistate/motor-truck-cargo"
 source_docs: ["2026-04-14_motor-truck-cargo_AL_filing-summary"]
 version_current: "REV 04 18"

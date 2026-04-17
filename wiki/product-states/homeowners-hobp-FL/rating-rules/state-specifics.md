@@ -1,10 +1,12 @@
 ---
 title: "Homeowners HOBP — Florida — State-Specific Rules"
+summary: "Florida-only Homeowners HOBP rules: catastrophic claim exclusion, all-perils roof ACV option, cosmetic damage exclusion, and Suit Against Us statutory limitations period for property coverages."
 type: product-state-sub
 product: homeowners-hobp
 state: FL
 parent: rating-rules
 sub: state-specifics
+scope: state-override
 multistate_base: "multistate/homeowners-hobp"
 source_docs:
   - "2026-04-14_homeowners-hobp_FL_state-pages_v1215"

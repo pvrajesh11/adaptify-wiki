@@ -1,5 +1,6 @@
 ---
 title: "Personal Automobile (Auto PPA)"
+summary: "Product overview for the Personal Automobile (PPA) line. Summarizes the base form PPA 0001, coverage parts, states active (AK, AL), and links to multistate rating rules and state-specific pages."
 type: product
 product: auto-ppa
 states_active: [AK, AL]

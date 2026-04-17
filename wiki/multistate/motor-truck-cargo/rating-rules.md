@@ -1,10 +1,13 @@
 ---
 title: "Motor Truck Cargo — Multistate — Rating Rules"
+summary: "Index page for the Motor Truck Cargo multistate rating rules. Summarizes coverage options, underwriting, coverage modifications, and rating factors; known state overrides are listed for AK and AL."
 type: multistate
 product: motor-truck-cargo
 page: rating-rules
+scope: multistate
 source_docs: ["2026-04-14_motor-truck-cargo_MULTI_manual_v04-18"]
 version_current: "REV 04 18"
+citations: ["AS 18.66", "Alabama Protection From Abuse Act"]
 last_updated: 2026-04-14
 ---
 

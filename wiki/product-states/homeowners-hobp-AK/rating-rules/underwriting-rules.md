@@ -1,10 +1,12 @@
 ---
 title: "Homeowners HOBP — Alaska — Underwriting Rules"
+summary: "Alaska Homeowners HOBP underwriting rules that deviate from the multistate base, centered on the AK owner-occupancy option and related eligibility adjustments."
 type: product-state-sub
 product: homeowners-hobp
 state: AK
 parent: rating-rules
 sub: underwriting-rules
+scope: state-override
 multistate_base: "multistate/homeowners-hobp"
 source_docs:
   - "2026-04-14_homeowners-hobp_AK_state-pages_v1215"

@@ -1,9 +1,11 @@
 ---
 title: "Homeowners HOBP — Alaska — Endorsements"
+summary: "Alaska Homeowners HOBP endorsements: mandatory HO 0854 02 21 Alaska amendatory plus AK-specific optional and mandatory endorsements referenced by the state pages."
 type: product-state
 product: homeowners-hobp
 state: AK
 page: endorsements
+scope: state-specific
 multistate_base: "multistate/homeowners-hobp"
 source_docs:
   - "2026-04-14_homeowners-hobp_AK_filing-summary"

@@ -1,9 +1,11 @@
 ---
 title: "Homeowners HOBP — Alabama — Endorsements"
+summary: "Alabama Homeowners HOBP endorsements: mandatory HO 0801 09 20 Alabama amendatory plus AL-specific optional endorsements referenced by the state pages."
 type: product-state
 product: homeowners-hobp
 state: AL
 page: endorsements
+scope: state-specific
 source_docs:
   - "2026-04-14_homeowners-hobp_AL_state-pages_v1215"
   - "2026-04-14_homeowners-hobp_AL_form_HO-0801-09-20"

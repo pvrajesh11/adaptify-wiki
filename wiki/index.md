@@ -1,5 +1,6 @@
 ---
 title: "Insurance Wiki — Master Index"
+summary: "Master catalog of every wiki page — products, states, multistate bases, product-state pages, forms, and coverages. Entry point for browsing the wiki."
 type: index
 last_updated: 2026-04-14
 pages: 70

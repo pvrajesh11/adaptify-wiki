@@ -1,9 +1,11 @@
 ---
 title: "Motor Truck Cargo — Alabama — Underwriting Rules"
+summary: "Alabama Motor Truck Cargo underwriting rules. All rating method eligibility, owner-operator tiers, fleet condition, financial stability, and target/hazardous cargo rules follow the multistate base (REV 04 18) unchanged."
 type: product-state
 product: motor-truck-cargo
 state: AL
 page: underwriting-rules
+scope: state-override
 multistate_base: "multistate/motor-truck-cargo"
 source_docs: ["2026-04-14_motor-truck-cargo_AL_filing-summary"]
 last_updated: 2026-04-14

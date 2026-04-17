@@ -1,8 +1,10 @@
 ---
 title: "Auto PPA — Multistate — Coverage Options"
+summary: "Multistate Auto PPA coverage options: eligibility rules, coverage combinations, UM/UIM, and non-owner coverage structures drawn from MULTI PAU Manual §2, §3, §4, §6.6."
 type: multistate
 product: auto-ppa
 page: coverage-options
+scope: multistate
 source_docs: ["2026-04-14_auto-ppa_MULTI_manual_v01-21"]
 version_current: "01 21"
 last_updated: 2026-04-14

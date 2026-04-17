@@ -1,9 +1,11 @@
 ---
 title: "Homeowners HOBP — Alabama — Rating Rules"
+summary: "Index page for Alabama Homeowners HOBP rating rules. Lists sub-pages (coverage options, underwriting, state-specifics) and summarizes AL deviations from the multistate base."
 type: product-state
 product: homeowners-hobp
 state: AL
 page: rating-rules
+scope: state-override
 multistate_base: "multistate/homeowners-hobp"
 source_docs:
   - "2026-04-14_homeowners-hobp_AL_filing-summary"

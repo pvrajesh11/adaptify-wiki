@@ -1,5 +1,6 @@
 ---
 title: "Alaska — State Regulatory Metadata"
+summary: "Alaska regulatory metadata: Division of Insurance contact, active products (Auto PPA, Homeowners HOBP, Motor Truck Cargo), and statutory references (Act 164, AS 18.66, Civil Rule 82)."
 type: state-meta
 state: AK
 products_active: [auto-ppa, homeowners-hobp, motor-truck-cargo]
@@ -12,6 +13,7 @@ statutory_refs:
   - "Alaska Rule of Civil Procedure 82(b)(1) — Contested case schedule for attorney fee caps (homeowners-hobp)"
   - "Alaska Statute 18.66 — Innocent insured protection and domestic violence subrogation (motor-truck-cargo)"
   - "Alaska law (general) — Statute of limitations for suit against insurer (motor-truck-cargo)"
+citations: ["AS 18.66", "Alaska Rule of Civil Procedure 82", "Alaska Act 164"]
 last_updated: 2026-04-14
 ---
 

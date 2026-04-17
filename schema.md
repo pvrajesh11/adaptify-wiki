@@ -43,7 +43,26 @@ Apply the same sub-page pattern to multistate pages when they exceed ~100 lines.
 
 ## 1. Frontmatter Specification
 
-Every wiki page **must** include YAML frontmatter. Required fields vary by page type.
+Every wiki page **must** include YAML frontmatter. Required fields vary by page type. All page-type-specific examples in §1.1–§1.11 include the common retrieval fields defined in §1.0.
+
+### 1.0 Common Retrieval Fields (all page types)
+
+These fields support hybrid (keyword + semantic) retrieval and filtered search. They are additive to the per-type fields in §1.1–§1.11.
+
+| Field | Required? | Format | Purpose |
+|---|---|---|---|
+| `summary` | **required on all pages** | 1–2 sentences, plain English | First-class retrieval chunk and auto-generated index description. Write it so a reader who never opens the page still knows what it covers. |
+| `tags` | optional | list of lowercase strings | Topical tags (e.g. `[roof, cosmetic-damage, acv]`). Reuse existing tags before inventing new ones. |
+| `citations` | optional; **required on any page that quotes statutes/regulations** | list of strings | Statute/regulation codes in canonical form (e.g. `["AS 28.22.295", "75 Pa. C.S. §1535", "Fla. Stat. §627.701"]`). Unique retrieval anchors in insurance content. |
+| `scope` | **required on rules/content pages** (see values) | one of `multistate` \| `state-specific` \| `state-override` \| `cross-product` | Identifies whether content is baseline, state-specific addition, or override. Does not apply to `product`, `state-meta`, `comparison`, or `index` pages. |
+
+**Scope values:**
+- `multistate` — rules apply across all states (pages under `wiki/multistate/`)
+- `state-specific` — rule/page exists only in a specific state; no multistate equivalent
+- `state-override` — rule/page replaces or modifies a multistate baseline for a specific state
+- `cross-product` — concept or coverage spans multiple products (pages under `wiki/coverages/`, `wiki/concepts/`)
+
+**Tag vocabulary (maintained list):** see `wiki/_tags.md` for the current vocabulary. Adding a new tag is allowed; document it there.
 
 ### 1.1 Product Page (`wiki/products/{product}.md`)
 
@@ -53,6 +72,8 @@ title: "Personal Automobile (PPA)"
 type: product
 product: auto-ppa
 states_active: [AK, AL]
+summary: "Personal Automobile (PPA) product overview; base form PPA 0001; currently active in AK and AL."
+tags: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -67,6 +88,8 @@ state: AK
 products_active: [auto-ppa, homeowners-hobp]
 doi_name: "Alaska Division of Insurance"
 statutory_refs: []
+summary: "Alaska regulatory metadata: active products, DOI, filing history."
+tags: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -79,8 +102,12 @@ title: "Auto PPA — Multistate — Coverage Options"
 type: multistate
 product: auto-ppa
 page: coverage-options           # rating-rules | coverage-options | driving-record-points | endorsements
+scope: multistate
 source_docs: []                  # MULTI manual entry IDs
 version_current: "01 21"
+summary: "Baseline coverage options (UM/UIM, FPB, tort) applied across all states unless overridden in a state manual."
+tags: []
+citations: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -94,11 +121,15 @@ type: product-state
 product: auto-ppa
 state: AK
 page: rating-rules
+scope: state-override                    # state-override | state-specific
 multistate_base: "multistate/auto-ppa"   # which multistate base this extends
 source_docs: []
 version_current: "1.5"
 version_history: ["1.5"]
 effective_date: YYYY-MM-DD               # from filing summary, not manual
+summary: "Alaska deviations from Auto PPA multistate rating rules; lists rules that differ, do not apply, or are state-specific."
+tags: []
+citations: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -113,8 +144,12 @@ product: auto-ppa
 state: AK
 parent: rating-rules
 sub: driving-record-points       # coverage-options | driving-record-points | state-specifics
+scope: state-override            # state-override | state-specific
 source_docs: []
 scope_notes: ""                  # e.g. "AK-specific" or "Multistate rule, applies in AK unchanged"
+summary: "Alaska driving-record point assignments for Auto PPA; notes multistate overrides and AK-specific exceptions."
+tags: []
+citations: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -128,8 +163,12 @@ type: product-state
 product: auto-ppa
 state: AK
 page: endorsements
+scope: state-specific            # state-override | state-specific
 source_docs: []
 version_current: "1.5"
+summary: "Endorsements available in Alaska for Auto PPA; includes mandatory, optional, and state-specific forms."
+tags: []
+citations: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -142,10 +181,13 @@ title: "PPA 0001 07 16 — Personal Automobile Policy"
 type: form
 form_id: PPA-0001-07-16
 product: auto-ppa
-scope: multistate
+scope: multistate               # multistate | state-specific
 state: null
 edition_date: "07 16"
 source_docs: []
+summary: "Base Personal Automobile Policy (PPA 0001, ed. 07 16); Parts A–D (liability, medical payments, UM, physical damage), definitions and conditions."
+tags: []
+citations: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -159,6 +201,10 @@ type: coverage
 coverage_id: uninsured-motorist
 products: [auto-ppa]
 states_with_variations: [AK, AL]
+scope: cross-product
+summary: "Uninsured Motorist (UM) coverage: definition, base behavior, and links to per-state variations."
+tags: []
+citations: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -171,6 +217,10 @@ title: "Named Insured"
 type: concept
 concept_id: named-insured
 products: [auto-ppa, homeowners-hobp, motor-truck-cargo]
+scope: cross-product
+summary: "Named Insured definition and role across Auto PPA, HOBP, and MTC policies."
+tags: []
+citations: []
 last_updated: YYYY-MM-DD
 ---
 ```
@@ -189,6 +239,8 @@ state: AK
 versions: ["1.4", "1.5"]
 source_docs: []
 generated_date: YYYY-MM-DD
+summary: "Side-by-side comparison of Auto PPA rules between Alaska and Alabama."
+tags: []
 last_updated: YYYY-MM-DD
 ---
 ```

@@ -1,10 +1,12 @@
 ---
 title: "Homeowners HOBP — Florida — Endorsements"
+summary: "Florida Homeowners HOBP endorsements: 14 mandatory endorsements (HO 0809/0814, HO 1300–1308, HO 1323, HO 1335, HO 1347, HO 4505) plus FL-specific optional endorsements (HO 2002, HO 2003, HO 4836)."
 type: product-state-sub
 product: homeowners-hobp
 state: FL
 parent: product-state
 sub: endorsements
+scope: state-specific
 multistate_base: "multistate/homeowners-hobp"
 source_docs:
   - "2026-04-14_homeowners-hobp_FL_state-pages_v1215"

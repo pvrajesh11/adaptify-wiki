@@ -1,10 +1,12 @@
 ---
 title: "Auto PPA — Alaska — Coverage Options"
+summary: "Alaska Auto PPA coverage options overriding the multistate base: mandatory UM/UIM offering, First Party Benefits, and Limited Tort treatment."
 type: product-state-sub
 product: auto-ppa
 state: AK
 parent: rating-rules
 sub: coverage-options
+scope: state-override
 source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5"]
 last_updated: 2026-04-14
 ---

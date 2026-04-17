@@ -1,5 +1,6 @@
 ---
 title: "Homeowners (HOBP)"
+summary: "Product overview for the Homeowners By-Peril Rating Plan (HOBP). Describes policy forms (HO 0001–0008), by-peril rating approach, and states active (AK, AL, FL)."
 type: product
 product: homeowners-hobp
 states_active: ["AK", "AL", "FL"]
