@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Alaska — State-Specific Rules"
 summary: "Alaska-only Homeowners HOBP rules: catastrophic claim exclusion, roof/cosmetic loss settlement, proximate cause, cancellation/renewal notice, appraisal, suit limitation, and other HO 0854 amendments."
 type: product-state-sub
+cq_category: manuals
 product: homeowners-hobp
 state: AK
 parent: rating-rules

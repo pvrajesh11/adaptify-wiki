@@ -2,6 +2,8 @@
 title: "Auto PPA — Alabama — Endorsements"
 summary: "Alabama Auto PPA endorsements: mandatory PPA 0101 03 18 Alabama amendatory plus AL-specific optional endorsements referenced by the state manual."
 type: product-state
+cq_category: manuals
+relevant_roles: [pds]
 product: auto-ppa
 state: AL
 page: endorsements

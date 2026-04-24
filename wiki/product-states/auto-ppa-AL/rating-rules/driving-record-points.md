@@ -2,6 +2,8 @@
 title: "Auto PPA — Alabama — Driving Record Points"
 summary: "Alabama Auto PPA driving record point structure. Overrides the multistate base in the same five cells as AK and documents AL-specific exceptions."
 type: product-state-sub
+cq_category: manuals
+relevant_roles: [actuary]
 product: auto-ppa
 state: AL
 parent: rating-rules

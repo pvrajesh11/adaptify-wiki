@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Florida — Rating Rules"
 summary: "Index page for Florida Homeowners HOBP rating rules. Lists sub-pages (coverage options, underwriting, state-specifics) and summarizes the nine FL overrides to the multistate base."
 type: product-state
+cq_category: manuals
 product: homeowners-hobp
 state: FL
 page: rating-rules

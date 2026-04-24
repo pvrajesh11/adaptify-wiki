@@ -2,6 +2,7 @@
 title: "Auto PPA — Alabama — State-Specific Rules"
 summary: "Alabama-only Auto PPA rules: transportation network provisions, abuse innocent-insured exception, 30-day renewal notice, suit limitation, and special vehicle handling."
 type: product-state-sub
+cq_category: manuals
 product: auto-ppa
 state: AL
 parent: rating-rules

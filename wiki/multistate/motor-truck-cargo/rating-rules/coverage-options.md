@@ -2,6 +2,7 @@
 title: "Motor Truck Cargo — Multistate — Coverage Options"
 summary: "Multistate Motor Truck Cargo coverage options: eligible risks, cargo types, coverage forms, rating method selection, and commodity classification drawn from CIM MTC MU RTG REV 04 18."
 type: multistate
+cq_category: manuals
 product: motor-truck-cargo
 page: coverage-options
 scope: multistate

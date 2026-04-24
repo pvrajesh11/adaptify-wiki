@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Alabama — State-Specific Rules"
 summary: "Alabama-only Homeowners HOBP rules: catastrophic claim exclusion, owner occupancy option, roof/cosmetic loss settlement, and abuse innocent-insured exception."
 type: product-state-sub
+cq_category: manuals
 product: homeowners-hobp
 state: AL
 parent: rating-rules

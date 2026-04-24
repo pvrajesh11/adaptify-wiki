@@ -2,6 +2,7 @@
 title: "Motor Truck Cargo — Alaska — Underwriting Rules"
 summary: "Alaska Motor Truck Cargo underwriting rules. All rating method eligibility, owner-operator tiers, fleet condition, financial stability, and vehicle protection factors follow the multistate base unchanged."
 type: product-state
+cq_category: manuals
 product: motor-truck-cargo
 state: AK
 page: underwriting-rules

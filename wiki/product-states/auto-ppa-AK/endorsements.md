@@ -2,6 +2,8 @@
 title: "Auto PPA — Alaska — Endorsements"
 summary: "Alaska Auto PPA endorsements: mandatory PPA 0154 01 20 Alaska amendatory plus AK-specific optional endorsements referenced by the state manual."
 type: product-state
+cq_category: manuals
+relevant_roles: [pds]
 product: auto-ppa
 state: AK
 page: endorsements

@@ -2,6 +2,8 @@
 title: "Alaska — State Regulatory Metadata"
 summary: "Alaska regulatory metadata: Division of Insurance contact, active products (Auto PPA, Homeowners HOBP, Motor Truck Cargo), and statutory references (Act 164, AS 18.66, Civil Rule 82)."
 type: state-meta
+cq_category: filings
+relevant_roles: [pm, pds]
 state: AK
 products_active: [auto-ppa, homeowners-hobp, motor-truck-cargo]
 doi_name: "Alaska Division of Insurance"

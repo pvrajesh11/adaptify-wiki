@@ -2,24 +2,37 @@
 #
 # Purpose: regression benchmark for any retrieval change (chunking, embeddings,
 # hybrid weights, reranker). Every entry has a question, the expected intent,
-# and the wiki pages that SHOULD surface in the top-k retrieval.
+# the wiki pages that SHOULD surface in the top-k retrieval, and Common-Questions
+# taxonomy facets (cq_category, role) so recall can be sliced by audience.
 #
-# Scoring (planned):
-#   - recall@k on `must_cite`   (primary metric; every must-cite must appear in top-k)
+# Scoring:
+#   - recall@k on `must_cite`     (primary; every must-cite must appear in top-k)
 #   - recall@k on `optional_cite` (secondary; nice-to-have)
+#   - per-category and per-role recall (run_evals.py prints breakdowns)
 #   - answer_hint is for human spot-check of generated answers, not automated
 #
-# Paths are relative to wiki/ root.
+# `expected`:
+#   - in_scope     — wiki should answer; must_cite required
+#   - out_of_scope — wiki has a known content gap; chatbot should refuse
+#                    cleanly (no fabrication). must_cite is empty.
+#                    Refusal evaluated by chat_evals.py, not run_evals.py.
 #
+# `cq_category`: manuals | forms | filings | objections | product-spec
+# `role`:        pm | pds | actuary
+#
+# Paths are relative to wiki/ root.
 # Keep this file human-editable. No auto-generation.
 
-version: 1
-generated: 2026-04-16
-coverage_notes: "10-question seed covering 4 intents across 3 products and 3 states. Does not exercise: concept pages (wiki/concepts/ is empty), comparison pages (wiki/comparisons/ is empty), DOI correspondence."
+version: 3
+generated: 2026-04-18
+coverage_notes: "25-question set: 21 in-scope (covering all 5 CQ categories and all 3 roles) plus 4 out-of-scope refusal probes. Originated from Common Questions doc; v3 adds AZ + CA AAIS amendatory coverage (q022–q025)."
 
 questions:
   - id: q001
     intent: factual-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
     question: "What does PPA 0154 01 20 do?"
     must_cite:
       - forms/PPA-0154-01-20.md
@@ -30,6 +43,9 @@ questions:
 
   - id: q002
     intent: state-override
+    cq_category: manuals
+    role: pds
+    expected: in_scope
     question: "Does the intra-family exclusion apply in Alaska for Auto PPA?"
     must_cite:
       - product-states/auto-ppa-AK/rating-rules/state-specifics.md
@@ -40,6 +56,9 @@ questions:
 
   - id: q003
     intent: comparison
+    cq_category: forms
+    role: pds
+    expected: in_scope
     question: "How do Alaska, Alabama, and Florida differ on the innocent-insured / abuse exception for Homeowners HOBP?"
     must_cite:
       - multistate/homeowners-hobp/rating-rules.md
@@ -51,6 +70,9 @@ questions:
 
   - id: q004
     intent: reverse-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
     question: "Which pages reference the Alaska domestic violence statute AS 18.66?"
     must_cite:
       - forms/HO-0854-02-21.md
@@ -62,6 +84,9 @@ questions:
 
   - id: q005
     intent: factual-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
     question: "Which endorsement amends PPA 0001 for Alabama?"
     must_cite:
       - forms/PPA-0101-03-18.md
@@ -71,6 +96,9 @@ questions:
 
   - id: q006
     intent: factual-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
     question: "What does Part D of the Personal Auto Policy cover?"
     must_cite:
       - forms/PPA-0001-07-16.md
@@ -79,6 +107,9 @@ questions:
 
   - id: q007
     intent: factual-lookup
+    cq_category: manuals
+    role: actuary
+    expected: in_scope
     question: "What is the difference between Per Vehicle and Gross Receipts rating methods in Motor Truck Cargo?"
     must_cite:
       - multistate/motor-truck-cargo/rating-rules/rating-factors.md
@@ -89,6 +120,9 @@ questions:
 
   - id: q008
     intent: definition
+    cq_category: forms
+    role: pds
+    expected: in_scope
     question: "Who is a 'named insured' under the HOBP policy?"
     must_cite:
       - forms/HO-0003-09-20.md
@@ -97,6 +131,9 @@ questions:
 
   - id: q009
     intent: factual-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
     question: "Is HO 0801 09 20 mandatory in Alabama?"
     must_cite:
       - forms/HO-0801-09-20.md
@@ -106,6 +143,9 @@ questions:
 
   - id: q010
     intent: metadata
+    cq_category: filings
+    role: pm
+    expected: in_scope
     question: "What is the effective date of the current Florida Homeowners HOBP filing (12/15 edition)?"
     must_cite:
       - product-states/homeowners-hobp-FL/rating-rules.md
@@ -113,3 +153,187 @@ questions:
       - states/FL.md
       - products/homeowners-hobp.md
     answer_hint: "2026-01-01. Version 12 15 (version history 01 11 → 03 13 → 12 13 → 01 15 → 12 15)."
+
+  # ----- New questions from Common Questions taxonomy (states translated to AK/AL/FL) -----
+
+  - id: q011
+    intent: factual-lookup
+    cq_category: manuals
+    role: pm
+    expected: in_scope
+    question: "What coverage combinations are available for Auto PPA in Alaska?"
+    must_cite:
+      - product-states/auto-ppa-AK/rating-rules/coverage-options.md
+    optional_cite:
+      - multistate/auto-ppa/rating-rules/coverage-options.md
+    answer_hint: "Liability only; Liability + Med Pay; Liability + UM; Liability + Med Pay + UM; Physical Damage (with or without other coverages). Separate premium per vehicle/coverage."
+
+  - id: q012
+    intent: factual-lookup
+    cq_category: manuals
+    role: actuary
+    expected: in_scope
+    question: "What driver discounts are available in the multistate Auto PPA?"
+    must_cite:
+      - multistate/auto-ppa/rating-rules/driving-record-points.md
+    optional_cite:
+      - product-states/auto-ppa-AK/rating-rules/driving-record-points.md
+      - product-states/auto-ppa-AL/rating-rules/driving-record-points.md
+    answer_hint: "Rule 6.3 — Driver Training, Defensive Driving, Good Student, Distant Driver (Student Away or Deployed), Safe Driver. Eligibility per Rule 6.3.x."
+
+  - id: q013
+    intent: factual-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
+    question: "What does Part A of the multistate Personal Auto Policy cover?"
+    must_cite:
+      - forms/PPA-0001-07-16.md
+    optional_cite: []
+    answer_hint: "Part A — Liability: bodily injury and property damage liability coverage, including supplemental payments. Exclusions and How-Much-We-Pay rules per the form."
+
+  - id: q014
+    intent: factual-lookup
+    cq_category: manuals
+    role: actuary
+    expected: in_scope
+    question: "What collision deductible options are available in the multistate Auto PPA?"
+    must_cite:
+      - multistate/auto-ppa/rating-rules/coverage-modifications.md
+    optional_cite:
+      - multistate/auto-ppa/rating-rules.md
+    answer_hint: "Collision deductible options are listed in Rule 8 (coverage modifications) and applicable rating sections."
+
+  - id: q015
+    intent: factual-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
+    question: "What mandatory endorsements are required in Alabama for Homeowners HOBP?"
+    must_cite:
+      - product-states/homeowners-hobp-AL/endorsements.md
+    optional_cite:
+      - forms/HO-0801-09-20.md
+    answer_hint: "Mandatory list includes HO 0814 (state pages, may be superseded by HO 0801 09 20 post-2026), HO 1300 asbestos, HO 1301-1308 form term amendments, HO 1323 lead, HO 1335 pollutants, HO 1347 punitive damages, HO 4505 wind/hail deductible."
+
+  - id: q016
+    intent: factual-lookup
+    cq_category: filings
+    role: pm
+    expected: in_scope
+    question: "What statutes does the Alaska Auto PPA reference?"
+    must_cite:
+      - states/AK.md
+    optional_cite:
+      - product-states/auto-ppa-AK/rating-rules/state-specifics.md
+      - forms/PPA-0154-01-20.md
+    answer_hint: "Act 164 (TNC), Alaska Statute 18.66 (DV / innocent insured), 75 Pa. C.S. § 1535 flagged as possible artifact, Alaska Rule of Civil Procedure 82 (HOBP attorney fees)."
+
+  - id: q017
+    intent: factual-lookup
+    cq_category: product-spec
+    role: pm
+    expected: in_scope
+    question: "Which states is the Auto PPA product currently active in?"
+    must_cite:
+      - products/auto-ppa.md
+    optional_cite:
+      - states/AK.md
+      - states/AL.md
+    answer_hint: "AK, AL, AZ, CA. AK/AL with full state manual v1.5 (effective 2026-01-01); AZ/CA form-filed only via AAIS amendatory endorsements (PA 0102 07 18 and PA 0104 01 25)."
+
+  # ----- AAIS amendatory coverage (AZ + CA, ingested 2026-04-18) -----
+
+  - id: q022
+    intent: factual-lookup
+    cq_category: forms
+    role: pds
+    expected: in_scope
+    question: "What does the Arizona amendatory exclude for transportation network drivers?"
+    must_cite:
+      - forms/PA-0102-07-18.md
+    optional_cite:
+      - product-states/auto-ppa-AZ/endorsements.md
+      - states/AZ.md
+    answer_hint: "PA 0102 07 18 excludes liability, medical payments, and physical damage while a vehicle is logged into a TNC as a driver or used as public/livery conveyance. Carve-outs: shared-expense carpool and tax-exempt-organization volunteer activity per ARS § 43-1201, A.4."
+
+  - id: q023
+    intent: reverse-lookup
+    cq_category: filings
+    role: pm
+    expected: in_scope
+    question: "Which Arizona statute does the AZ Auto PPA reference for shared-expense carpools and volunteer activity?"
+    must_cite:
+      - forms/PA-0102-07-18.md
+      - states/AZ.md
+    optional_cite:
+      - product-states/auto-ppa-AZ/endorsements.md
+    answer_hint: "Arizona Revised Statutes § 43-1201, A.4 — defines tax-exempt organizations and is invoked by the AZ amendatory (PA 0102 07 18) as the volunteer-activity carve-out for TNC, public/livery, and food/goods-delivery exclusions across Part A, Part B, and Part D."
+
+  - id: q024
+    intent: definition
+    cq_category: forms
+    role: pds
+    expected: in_scope
+    question: "How does the California Auto PPA amendatory define 'you' and 'your'?"
+    must_cite:
+      - forms/PA-0104-01-25.md
+    optional_cite:
+      - product-states/auto-ppa-CA/endorsements.md
+      - states/CA.md
+    answer_hint: "PA 0104 01 25 redefines 'you' / 'your' as the named insured plus the spouse OR a party in a domestic partnership recognized by California law with the named insured (resident of the same household). Coverage extends to a former spouse or domestic partner who ceases to be a resident, until the earliest of 90 days after the residency change, the effective date of another policy showing that person as a named insured, or the end of the policy period."
+
+  - id: q025
+    intent: comparison
+    cq_category: forms
+    role: pds
+    expected: in_scope
+    question: "Which states recognize domestic partnership in the Auto PPA 'you' or 'family member' definition?"
+    must_cite:
+      - forms/PA-0104-01-25.md
+    optional_cite:
+      - states/CA.md
+      - forms/_matrix.md
+    answer_hint: "California (PA 0104 01 25) — the only state in the wiki to date that extends 'you' / 'your' / 'family member' to registered domestic partnerships under state law. AK and AL Auto PPA amendatories do not include this recognition."
+
+  # ----- Out-of-scope refusal probes (chat_evals.py evaluates refusal; run_evals.py records the gap) -----
+
+  - id: q018
+    intent: out-of-scope-probe
+    cq_category: manuals
+    role: pm
+    expected: out_of_scope
+    question: "Who are the top insurance carriers providing BI, PD, Med, UMBI, UIMBI in Alaska?"
+    must_cite: []
+    optional_cite: []
+    answer_hint: "GAP: wiki contains no carrier-comparison data. Chatbot should respond that the wiki does not have data on competing carriers — do not fabricate."
+
+  - id: q019
+    intent: out-of-scope-probe
+    cq_category: filings
+    role: pm
+    expected: out_of_scope
+    question: "What are the typical filing response times in Florida?"
+    must_cite: []
+    optional_cite: []
+    answer_hint: "GAP: filings/ lane is a stub with no response-time data. Chatbot should refuse cleanly."
+
+  - id: q020
+    intent: out-of-scope-probe
+    cq_category: filings
+    role: pm
+    expected: out_of_scope
+    question: "Does Alabama publish a checklist for new filings?"
+    must_cite: []
+    optional_cite: []
+    answer_hint: "GAP: no DOI-process docs ingested. Chatbot should refuse cleanly."
+
+  - id: q021
+    intent: out-of-scope-probe
+    cq_category: objections
+    role: pds
+    expected: out_of_scope
+    question: "What recent objections have been raised on Alaska Auto PPA filings?"
+    must_cite: []
+    optional_cite: []
+    answer_hint: "GAP: objections/ lane is a stub; no SERFF correspondence ingested. Chatbot should refuse cleanly."

@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Florida — Coverage Options"
 summary: "Florida Homeowners HOBP coverage options overriding the multistate base: 14 mandatory endorsements, innocent insured exception for domestic abuse, and 30-day renewal notice."
 type: product-state-sub
+cq_category: manuals
 product: homeowners-hobp
 state: FL
 parent: rating-rules

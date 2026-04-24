@@ -2,6 +2,8 @@
 title: "Motor Truck Cargo (MTC)"
 summary: "Product overview for Motor Truck Cargo (MTC), a commercial inland marine product covering cargo transported by motor carriers. Describes rating methods, commodity classes, and states active (AK, AL)."
 type: product
+cq_category: product-spec
+relevant_roles: [pm]
 product: motor-truck-cargo
 states_active: ["AK", "AL"]
 last_updated: 2026-04-14

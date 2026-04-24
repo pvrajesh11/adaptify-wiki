@@ -12,5 +12,27 @@
       "wiki/coverages/uninsured-motorist.md",
       "wiki/coverages/transportation-network.md"
     ]
+  },
+  "2026-04-18_auto-ppa_AZ_form_PA-0102-07-18": {
+    "absorbed_date": "2026-04-18",
+    "wiki_pages_updated": [
+      "wiki/forms/PA-0102-07-18.md",
+      "wiki/states/AZ.md",
+      "wiki/product-states/auto-ppa-AZ/endorsements.md",
+      "wiki/products/auto-ppa.md",
+      "wiki/forms/_matrix.md",
+      "wiki/index.md"
+    ]
+  },
+  "2026-04-18_auto-ppa_CA_form_PA-0104-01-25": {
+    "absorbed_date": "2026-04-18",
+    "wiki_pages_updated": [
+      "wiki/forms/PA-0104-01-25.md",
+      "wiki/states/CA.md",
+      "wiki/product-states/auto-ppa-CA/endorsements.md",
+      "wiki/products/auto-ppa.md",
+      "wiki/forms/_matrix.md",
+      "wiki/index.md"
+    ]
   }
 }

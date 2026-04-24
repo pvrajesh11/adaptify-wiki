@@ -2,6 +2,7 @@
 title: "Auto PPA — Multistate — Rating Rules"
 summary: "Index page for the Auto PPA multistate rating rules. Summarizes coverage options, driving record points, and coverage modifications; known state overrides are listed for AK and AL."
 type: multistate
+cq_category: manuals
 product: auto-ppa
 page: rating-rules
 scope: multistate

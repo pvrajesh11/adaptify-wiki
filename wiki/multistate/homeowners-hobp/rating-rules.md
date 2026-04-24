@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Multistate — Rating Rules"
 summary: "Index page for the Homeowners HOBP multistate rating rules. Summarizes coverage options, underwriting, coverage modifications, rating factors, and flood coverage; known state overrides are listed for AK, AL, and FL."
 type: multistate
+cq_category: manuals
 product: homeowners-hobp
 page: rating-rules
 scope: multistate

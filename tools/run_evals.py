@@ -157,13 +157,45 @@ def run(top_k: int = 5, verbose: bool = False, mode: str = "auto"):
     total_opt = 0
     total_opt_found = 0
     rows = []
+    # Bucketed counters for cq_category and role
+    bucket_must = {}  # key -> [found, total]
+    bucket_opt = {}
+
+    def bump(d, key, found, total):
+        if not key:
+            key = "-"
+        slot = d.setdefault(key, [0, 0])
+        slot[0] += found
+        slot[1] += total
 
     for q in questions:
         qid = q.get("id", "?")
         question = q.get("question", "")
         intent = q.get("intent", "-")
+        cq = q.get("cq_category", "-")
+        role = q.get("role", "-")
+        expected = q.get("expected", "in_scope")
         must = q.get("must_cite") or []
         opt = q.get("optional_cite") or []
+
+        # Out-of-scope questions are not retrieval-evaluated here.
+        # chat_evals.py handles refusal correctness.
+        if expected == "out_of_scope":
+            rows.append(
+                {
+                    "id": qid,
+                    "intent": intent,
+                    "cq": cq,
+                    "role": role,
+                    "status": "SKIP",
+                    "must_recall": "-",
+                    "opt_recall": "-",
+                    "missed": [],
+                    "hits": [],
+                    "question": question,
+                }
+            )
+            continue
 
         hits = search_pages(question, top_k=top_k, mode=mode)
         hit_paths = [h["path"] for h in hits]
@@ -176,11 +208,18 @@ def run(top_k: int = 5, verbose: bool = False, mode: str = "auto"):
         total_opt += len(opt)
         total_opt_found += len(opt_hit)
 
+        bump(bucket_must, f"cat:{cq}", len(must_hit), len(must))
+        bump(bucket_must, f"role:{role}", len(must_hit), len(must))
+        bump(bucket_opt, f"cat:{cq}", len(opt_hit), len(opt))
+        bump(bucket_opt, f"role:{role}", len(opt_hit), len(opt))
+
         status = "PASS" if len(must_hit) == len(must) else "FAIL"
         rows.append(
             {
                 "id": qid,
                 "intent": intent,
+                "cq": cq,
+                "role": role,
                 "status": status,
                 "must_recall": f"{len(must_hit)}/{len(must)}",
                 "opt_recall": f"{len(opt_hit)}/{len(opt)}" if opt else "-",
@@ -193,28 +232,54 @@ def run(top_k: int = 5, verbose: bool = False, mode: str = "auto"):
     # Report
     print(f"Eval: {SEED}   top_k={top_k}   mode={mode}")
     print()
-    print(f"{'ID':<6} {'STATUS':<6} {'INTENT':<16} {'MUST':<6} {'OPT':<6}  QUESTION")
-    print("-" * 100)
+    print(f"{'ID':<6} {'STATUS':<6} {'CAT':<13} {'ROLE':<8} {'MUST':<6} {'OPT':<6}  QUESTION")
+    print("-" * 110)
     for r in rows:
         q = r["question"]
-        if len(q) > 50:
-            q = q[:47] + "..."
+        if len(q) > 45:
+            q = q[:42] + "..."
         print(
-            f"{r['id']:<6} {r['status']:<6} {r['intent']:<16} "
+            f"{r['id']:<6} {r['status']:<6} {r['cq']:<13} {r['role']:<8} "
             f"{r['must_recall']:<6} {r['opt_recall']:<6}  {q}"
         )
 
-    total = len(rows)
+    total_in = sum(1 for r in rows if r["status"] != "SKIP")
     passed = sum(1 for r in rows if r["status"] == "PASS")
+    skipped = sum(1 for r in rows if r["status"] == "SKIP")
     must_recall = (total_must_found / total_must) if total_must else 0.0
     opt_recall = (total_opt_found / total_opt) if total_opt else 0.0
 
-    print("-" * 100)
+    print("-" * 110)
     print(
-        f"Passed: {passed}/{total}   "
+        f"Passed: {passed}/{total_in} (in-scope)   "
         f"must-cite recall: {total_must_found}/{total_must} ({must_recall:.0%})   "
-        f"optional-cite recall: {total_opt_found}/{total_opt} ({opt_recall:.0%})"
+        f"optional-cite recall: {total_opt_found}/{total_opt} ({opt_recall:.0%})   "
+        f"skipped (out-of-scope): {skipped}"
     )
+
+    # Per-bucket breakdown
+    print()
+    print("Per-category recall (must-cite / opt-cite):")
+    for key in sorted(k for k in bucket_must if k.startswith("cat:")):
+        m = bucket_must[key]
+        o = bucket_opt.get(key, [0, 0])
+        m_pct = (m[0] / m[1]) if m[1] else 0.0
+        o_pct = (o[0] / o[1]) if o[1] else 0.0
+        print(
+            f"  {key[4:]:<14} must {m[0]}/{m[1]} ({m_pct:.0%})   "
+            f"opt {o[0]}/{o[1]} ({o_pct:.0%})"
+        )
+    print()
+    print("Per-role recall (must-cite / opt-cite):")
+    for key in sorted(k for k in bucket_must if k.startswith("role:")):
+        m = bucket_must[key]
+        o = bucket_opt.get(key, [0, 0])
+        m_pct = (m[0] / m[1]) if m[1] else 0.0
+        o_pct = (o[0] / o[1]) if o[1] else 0.0
+        print(
+            f"  {key[5:]:<14} must {m[0]}/{m[1]} ({m_pct:.0%})   "
+            f"opt {o[0]}/{o[1]} ({o_pct:.0%})"
+        )
 
     if verbose:
         print()

@@ -2,6 +2,8 @@
 title: "Motor Truck Cargo — Alaska — Endorsements"
 summary: "Alaska Motor Truck Cargo endorsements: mandatory CIM 2003 06 20 Alaska amendatory plus the base CIM 7002 01 15 form. No AK-specific optional endorsements identified."
 type: product-state
+cq_category: manuals
+relevant_roles: [pds]
 product: motor-truck-cargo
 state: AK
 page: endorsements

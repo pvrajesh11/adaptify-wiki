@@ -2,6 +2,8 @@
 title: "Motor Truck Cargo — Alabama — Endorsements"
 summary: "Alabama Motor Truck Cargo endorsements: mandatory CIM 2001 08 15 Alabama amendatory (abuse exception, subrogation carve-out, Suit Against Us replacement). No AL-specific optional endorsements identified."
 type: product-state
+cq_category: manuals
+relevant_roles: [pds]
 product: motor-truck-cargo
 state: AL
 page: endorsements

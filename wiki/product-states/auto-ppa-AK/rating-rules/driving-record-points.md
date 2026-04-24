@@ -2,6 +2,8 @@
 title: "Auto PPA — Alaska — Driving Record Points"
 summary: "Alaska Auto PPA driving record point structure. Overrides the multistate base in five cells of the point table and documents AK-specific exceptions."
 type: product-state-sub
+cq_category: manuals
+relevant_roles: [actuary]
 product: auto-ppa
 state: AK
 parent: rating-rules

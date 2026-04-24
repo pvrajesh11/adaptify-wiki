@@ -2,6 +2,7 @@
 title: "Auto PPA — Alabama — Rating Rules"
 summary: "Index page for Alabama Auto PPA rating rules. Lists sub-pages (coverage options, driving record points, state-specific rules) and summarizes AL deviations from the multistate base."
 type: product-state
+cq_category: manuals
 product: auto-ppa
 state: AL
 page: rating-rules

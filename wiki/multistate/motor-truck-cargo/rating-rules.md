@@ -2,6 +2,7 @@
 title: "Motor Truck Cargo — Multistate — Rating Rules"
 summary: "Index page for the Motor Truck Cargo multistate rating rules. Summarizes coverage options, underwriting, coverage modifications, and rating factors; known state overrides are listed for AK and AL."
 type: multistate
+cq_category: manuals
 product: motor-truck-cargo
 page: rating-rules
 scope: multistate

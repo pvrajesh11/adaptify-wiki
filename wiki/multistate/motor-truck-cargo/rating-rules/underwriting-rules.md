@@ -2,6 +2,7 @@
 title: "Motor Truck Cargo — Multistate — Underwriting Rules"
 summary: "Multistate Motor Truck Cargo underwriting rules: rating method selection, owner-operator tiers, fleet condition, and financial stability evaluation drawn from CIM MTC MU RTG REV 04 18."
 type: multistate
+cq_category: manuals
 product: motor-truck-cargo
 page: underwriting-rules
 scope: multistate

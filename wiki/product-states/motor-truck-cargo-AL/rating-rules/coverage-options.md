@@ -2,6 +2,7 @@
 title: "Motor Truck Cargo — Alabama — Coverage Options"
 summary: "Alabama Motor Truck Cargo coverage options. All coverage forms, rating method selection, and commodity classification follow the multistate base (REV 04 18) unchanged."
 type: product-state
+cq_category: manuals
 product: motor-truck-cargo
 state: AL
 page: coverage-options

@@ -2,6 +2,8 @@
 title: "Alabama — State Regulatory Metadata"
 summary: "Alabama regulatory metadata: Department of Insurance contact, active products (Auto PPA, Homeowners HOBP, Motor Truck Cargo), and statutory references (Alabama Protection From Abuse Act, Act 164)."
 type: state-meta
+cq_category: filings
+relevant_roles: [pm, pds]
 state: AL
 products_active: [auto-ppa, homeowners-hobp, motor-truck-cargo]
 doi_name: "Alabama Department of Insurance"

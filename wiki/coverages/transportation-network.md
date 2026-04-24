@@ -2,6 +2,7 @@
 title: "Transportation Network / Ride Sharing Coverage"
 summary: "Auto PPA coverage for transportation network (rideshare) drivers, structured across three phases based on driver status. Documents Alaska's Act 164 minimums and Phase I/II/III limits."
 type: coverage
+cq_category: manuals
 coverage_id: transportation-network
 products: [auto-ppa]
 states_with_variations: [AK]

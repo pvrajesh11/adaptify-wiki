@@ -2,6 +2,7 @@
 title: "Auto PPA — Alabama — Coverage Options"
 summary: "Alabama Auto PPA coverage options overriding the multistate base: mandatory UM/UIM offering, First Party Benefits, and Limited Tort treatment."
 type: product-state-sub
+cq_category: manuals
 product: auto-ppa
 state: AL
 parent: rating-rules

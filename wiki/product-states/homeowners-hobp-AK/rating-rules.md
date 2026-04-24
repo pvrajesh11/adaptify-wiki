@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Alaska — Rating Rules"
 summary: "Index page for Alaska Homeowners HOBP rating rules. Lists sub-pages (coverage options, underwriting, state-specifics) and summarizes AK deviations including the 18 HO 0854 amendments."
 type: product-state
+cq_category: manuals
 product: homeowners-hobp
 state: AK
 page: rating-rules

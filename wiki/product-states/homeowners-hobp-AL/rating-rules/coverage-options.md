@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Alabama — Coverage Options"
 summary: "Alabama Homeowners HOBP coverage options. Follows the multistate base unchanged; AL-specific overrides are documented in state-specifics."
 type: product-state-sub
+cq_category: manuals
 product: homeowners-hobp
 state: AL
 parent: rating-rules

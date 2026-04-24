@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Multistate — Coverage Options"
 summary: "Multistate Homeowners HOBP coverage options: policy forms (HO 0001–0008), coverage structure (A/B/C/D/L/M), perils insured against, and loss settlement drawn from MULTI HOBP 0111 §3–§4."
 type: multistate
+cq_category: manuals
 product: homeowners-hobp
 page: coverage-options
 scope: multistate

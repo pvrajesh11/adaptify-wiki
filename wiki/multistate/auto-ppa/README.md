@@ -2,6 +2,7 @@
 title: "Auto PPA — Multistate Base"
 summary: "Placeholder index for the Auto PPA multistate base directory. Will be populated when the MULTI PAU Manual is ingested and absorbed."
 type: multistate-index
+cq_category: manuals
 product: auto-ppa
 source_docs: []
 stub: true

@@ -2,6 +2,8 @@
 title: "Auto PPA — Multistate — Driving Record Points"
 summary: "Multistate Auto PPA driving record points: base point structure, additional-points rules, exceptions, and driver discount treatment drawn from MULTI PAU Manual §6.4, §6.1–6.5."
 type: multistate
+cq_category: manuals
+relevant_roles: [actuary]
 product: auto-ppa
 page: driving-record-points
 scope: multistate

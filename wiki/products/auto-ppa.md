@@ -2,10 +2,12 @@
 title: "Personal Automobile (Auto PPA)"
 summary: "Product overview for the Personal Automobile (PPA) line. Summarizes the base form PPA 0001, coverage parts, states active (AK, AL), and links to multistate rating rules and state-specific pages."
 type: product
+cq_category: product-spec
+relevant_roles: [pm]
 product: auto-ppa
-states_active: [AK, AL]
-last_updated: 2026-04-14
-source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5", "2026-04-14_auto-ppa_AL_manual_v1.5"]
+states_active: [AK, AL, AZ, CA]
+last_updated: 2026-04-18
+source_docs: ["2026-04-14_auto-ppa_AK_manual_v1.5", "2026-04-14_auto-ppa_AL_manual_v1.5", "2026-04-18_auto-ppa_AZ_form_PA-0102-07-18", "2026-04-18_auto-ppa_CA_form_PA-0104-01-25"]
 ---
 
 # Personal Automobile (Auto PPA)
@@ -35,9 +37,13 @@ State pages currently document all rules — deviations table will be completed 
 |---|---|---|---|---|
 | AK | 1.5 | 2026-01-01 | [AK — Rating Rules](../product-states/auto-ppa-AK/rating-rules.md) | [AK — Endorsements](../product-states/auto-ppa-AK/endorsements.md) |
 | AL | 1.5 | 2026-01-01 | [AL — Rating Rules](../product-states/auto-ppa-AL/rating-rules.md) | [AL — Endorsements](../product-states/auto-ppa-AL/endorsements.md) |
+| AZ | — (form filed only) | 2018-07 (form edition) | — | [AZ — Endorsements](../product-states/auto-ppa-AZ/endorsements.md) |
+| CA | — (form filed only) | 2025-01 (form edition) | — | [CA — Endorsements](../product-states/auto-ppa-CA/endorsements.md) |
 
 ## Key Forms
 
-PA 0001 — Personal Auto Policy (base form, multistate) — form page not yet created
-PA 0154 — Amendatory Endorsement — Alaska (mandatory) — form page not yet created
+[PPA 0001 07 16](../forms/PPA-0001-07-16.md) — Personal Auto Policy (base form, multistate)
+[PPA 0154 01 20](../forms/PPA-0154-01-20.md) — Amendatory Endorsement — Alaska (mandatory)
 [PPA 0101 03 18](../forms/PPA-0101-03-18.md) — Amendatory Endorsement — Alabama (mandatory)
+[PA 0102 07 18](../forms/PA-0102-07-18.md) — Amendatory Endorsement — Arizona (mandatory, AAIS)
+[PA 0104 01 25](../forms/PA-0104-01-25.md) — Amendatory Endorsement — California (mandatory, AAIS)

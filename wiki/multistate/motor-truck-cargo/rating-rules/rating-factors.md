@@ -2,6 +2,8 @@
 title: "Motor Truck Cargo — Multistate — Rating Factors"
 summary: "Multistate Motor Truck Cargo rating factors: commodity classes, operating radius, vehicle protection tiers, and rating sequences drawn from CIM MTC MU RTG REV 04 18."
 type: multistate
+cq_category: manuals
+relevant_roles: [actuary]
 product: motor-truck-cargo
 page: rating-factors
 scope: multistate

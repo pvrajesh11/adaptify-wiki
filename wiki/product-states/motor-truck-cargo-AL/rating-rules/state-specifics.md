@@ -2,6 +2,7 @@
 title: "Motor Truck Cargo — Alabama — State Specifics"
 summary: "Alabama-only Motor Truck Cargo rules introduced by CIM 2001 08 15: abuse exception to the Criminal Acts exclusion, subrogation carve-out for abuse victims, and Suit Against Us statutory period."
 type: product-state
+cq_category: manuals
 product: motor-truck-cargo
 state: AL
 page: state-specifics

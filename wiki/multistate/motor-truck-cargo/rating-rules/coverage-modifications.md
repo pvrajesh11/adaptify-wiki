@@ -2,6 +2,7 @@
 title: "Motor Truck Cargo — Multistate — Coverage Modifications"
 summary: "Multistate Motor Truck Cargo coverage modifications: refrigeration breakdown, contingent cargo, named perils, terminal coverage, and deductible options drawn from CIM MTC MU RTG REV 04 18."
 type: multistate
+cq_category: manuals
 product: motor-truck-cargo
 page: coverage-modifications
 scope: multistate

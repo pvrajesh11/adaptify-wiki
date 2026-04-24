@@ -2,6 +2,7 @@
 title: "Homeowners HOBP — Multistate — Underwriting Rules"
 summary: "Multistate Homeowners HOBP underwriting rules: eligibility by form, ineligible risks (mobile homes, farm risks), and occupancy requirements drawn from MULTI HOBP 0111 §2."
 type: multistate
+cq_category: manuals
 product: homeowners-hobp
 page: underwriting-rules
 scope: multistate

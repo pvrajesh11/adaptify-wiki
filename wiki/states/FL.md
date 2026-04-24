@@ -2,6 +2,8 @@
 title: "Florida — State Regulatory Metadata"
 summary: "Florida regulatory metadata: Florida Office of Insurance Regulation (FLOIR) contact, active products (Homeowners HOBP), and statutory references (Florida Protection From Abuse Act, Fla. Stat. §95.11)."
 type: state-meta
+cq_category: filings
+relevant_roles: [pm, pds]
 state: FL
 products_active: [homeowners-hobp]
 doi_name: "Florida Office of Insurance Regulation"
