@@ -1,0 +1,335 @@
+# Conversation eval — multi-turn chat scenarios.
+#
+# Purpose: Phase 0 baseline for the chat experience. Single-turn evals (run_evals.py
+# for retrieval, chat_evals.py for refusal) cannot measure entity inheritance across
+# turns, slot-filling on underspecified queries, or refusal cleanliness inside a
+# multi-turn flow. This file is the target every later phase tries to beat.
+#
+# Each scenario is a sequence of turns (1+). Each turn declares an `expected_action`
+# (answer | clarify | refuse) and the dimensions that should be scored. The runner
+# (tools/chat_scenarios.py) replays the scenario through the same retrieval + chat
+# pipeline as production (tools/chat/server.py), so the baseline reflects what the
+# user actually experiences today.
+#
+# Schema notes:
+#   - `id`                        scenario id (s001, s002, ...)
+#   - `cq_category`               manuals | forms | filings | objections | product-spec
+#   - `role`                      pm | pds | actuary
+#   - `description`               human spot-check; not scored
+#   - `turns[]`
+#       - `turn`                  1-based turn index
+#       - `question`              user message
+#       - `expected_action`       answer | clarify | refuse
+#       - `introduces_entities`   facets the user introduces this turn (state, lob, ...)
+#       - `inherits_entities`     facets the runner expects to carry over from prior turns
+#       - `expected_must_cite`    paths that MUST appear in this turn's sources (action=answer only)
+#       - `expected_optional_cite`paths nice-to-have (action=answer only)
+#       - `expected_topics`       case-insensitive substrings the answer should contain (action=answer only)
+#       - `expected_clarification_topics` substrings to look for in the response (action=clarify only)
+#       - `expected_refusal_topic`        free-form note for human spot-check (action=refuse only)
+#
+# Paths are relative to wiki/ root. Keep this file human-editable.
+
+version: 1
+generated: 2026-04-23
+notes: "10 scenarios drawn from Common Questions doc, translated to states we have ingested (AK / AL / AZ / CA / FL). Initial bar is strict — every turn must pass every applicable dimension for the scenario to pass. Expect failures on multi-turn entity inheritance (s001 turn 2, s002 turn 2, s010 turns 2-3) since today's chat is stateless and re-detects state from the LAST user message only."
+
+scenarios:
+
+  - id: s001
+    cq_category: forms
+    role: pds
+    description: "Cross-state inheritance: intra-family exclusion AK -> CA -> AL. State changes each turn; LOB inherits."
+    turns:
+      - turn: 1
+        question: "Does the intra-family exclusion apply in Alaska for Auto PPA?"
+        expected_action: answer
+        introduces_entities:
+          state: AK
+          lob: auto-ppa
+        expected_must_cite:
+          - product-states/auto-ppa-AK/rating-rules/state-specifics.md
+        expected_optional_cite:
+          - multistate/auto-ppa/rating-rules.md
+          - forms/PPA-0154-01-20.md
+        expected_topics:
+          - "intra-family"
+          - "Alaska"
+          - "does not apply"
+      - turn: 2
+        question: "What about California?"
+        expected_action: answer
+        inherits_entities:
+          lob: auto-ppa
+        introduces_entities:
+          state: CA
+        expected_must_cite:
+          - forms/PA-0104-01-25.md
+        expected_optional_cite:
+          - states/CA.md
+          - product-states/auto-ppa-CA/endorsements.md
+        expected_topics:
+          - "California"
+          - "indemnification"
+      - turn: 3
+        question: "And Alabama?"
+        expected_action: answer
+        inherits_entities:
+          lob: auto-ppa
+        introduces_entities:
+          state: AL
+        expected_must_cite:
+          - forms/PPA-0101-03-18.md
+        expected_optional_cite:
+          - states/AL.md
+          - product-states/auto-ppa-AL/endorsements.md
+        expected_topics:
+          - "Alabama"
+          - "abuse"
+
+  - id: s002
+    cq_category: manuals
+    role: pm
+    description: "Followup chain within one state: Auto PPA in Alaska. State + LOB inherit; coverage shifts each turn."
+    turns:
+      - turn: 1
+        question: "What coverage combinations are available for Auto PPA in Alaska?"
+        expected_action: answer
+        introduces_entities:
+          state: AK
+          lob: auto-ppa
+        expected_must_cite:
+          - product-states/auto-ppa-AK/rating-rules/coverage-options.md
+        expected_optional_cite:
+          - multistate/auto-ppa/rating-rules/coverage-options.md
+        expected_topics:
+          - "liability"
+          - "coverage"
+      - turn: 2
+        question: "What collision deductible options are available for that?"
+        expected_action: answer
+        inherits_entities:
+          state: AK
+          lob: auto-ppa
+        expected_must_cite:
+          - multistate/auto-ppa/rating-rules/coverage-modifications.md
+        expected_optional_cite:
+          - multistate/auto-ppa/rating-rules.md
+        expected_topics:
+          - "deductible"
+      - turn: 3
+        question: "And what driver discounts apply?"
+        expected_action: answer
+        inherits_entities:
+          state: AK
+          lob: auto-ppa
+        expected_must_cite:
+          - multistate/auto-ppa/rating-rules/driving-record-points.md
+        expected_optional_cite:
+          - product-states/auto-ppa-AK/rating-rules/driving-record-points.md
+        expected_topics:
+          - "discount"
+
+  - id: s003
+    cq_category: forms
+    role: pds
+    description: "Reverse-lookup statute -> state switch. Tests retrieval by statute string and entity reset on state change."
+    turns:
+      - turn: 1
+        question: "Which forms reference Alaska statute AS 18.66?"
+        expected_action: answer
+        introduces_entities:
+          state: AK
+        expected_must_cite:
+          - forms/HO-0854-02-21.md
+        expected_optional_cite:
+          - forms/CIM-2003-06-20.md
+          - multistate/homeowners-hobp/rating-rules.md
+        expected_topics:
+          - "AS 18.66"
+          - "domestic violence"
+      - turn: 2
+        question: "What about California domestic-partnership law in Auto PPA?"
+        expected_action: answer
+        introduces_entities:
+          state: CA
+          lob: auto-ppa
+        expected_must_cite:
+          - forms/PA-0104-01-25.md
+        expected_optional_cite:
+          - states/CA.md
+        expected_topics:
+          - "California"
+          - "domestic partnership"
+
+  - id: s004
+    cq_category: forms
+    role: pds
+    description: "Definition + cross-version comparison. Tests definition retrieval and follow-up that requires cross-form joining."
+    turns:
+      - turn: 1
+        question: "How does the California Auto PPA amendatory define 'you' and 'your'?"
+        expected_action: answer
+        introduces_entities:
+          state: CA
+          lob: auto-ppa
+        expected_must_cite:
+          - forms/PA-0104-01-25.md
+        expected_optional_cite:
+          - states/CA.md
+          - product-states/auto-ppa-CA/endorsements.md
+        expected_topics:
+          - "domestic partnership"
+          - "spouse"
+      - turn: 2
+        question: "How does that differ from the multistate base policy definition?"
+        expected_action: answer
+        inherits_entities:
+          lob: auto-ppa
+        expected_must_cite:
+          - forms/PPA-0001-07-16.md
+        expected_optional_cite:
+          - forms/PA-0104-01-25.md
+        expected_topics:
+          - "spouse"
+
+  - id: s005
+    cq_category: manuals
+    role: pm
+    description: "Underspecified query -> should clarify (state and LOB both missing)."
+    turns:
+      - turn: 1
+        question: "What are the base factors?"
+        expected_action: clarify
+        expected_clarification_topics:
+          - "state"
+          - "product"
+
+  - id: s006
+    cq_category: manuals
+    role: pm
+    description: "Clarify-then-answer flow. Turn 1 is missing state; Turn 2 supplies it."
+    turns:
+      - turn: 1
+        question: "List driver discount rules I should review."
+        expected_action: clarify
+        expected_clarification_topics:
+          - "state"
+      - turn: 2
+        question: "Alabama Auto PPA."
+        expected_action: answer
+        introduces_entities:
+          state: AL
+          lob: auto-ppa
+        expected_must_cite:
+          - multistate/auto-ppa/rating-rules/driving-record-points.md
+        expected_optional_cite:
+          - product-states/auto-ppa-AL/rating-rules/driving-record-points.md
+        expected_topics:
+          - "discount"
+
+  - id: s007
+    cq_category: manuals
+    role: pm
+    description: "Carrier-comparison question -> should refuse cleanly (carrier data not in wiki)."
+    turns:
+      - turn: 1
+        question: "Who are the top 10 carriers in California for Auto PPA?"
+        expected_action: refuse
+        expected_refusal_topic: "carrier"
+
+  - id: s008
+    cq_category: filings
+    role: pm
+    description: "Filings metadata followup. Tests retrieval of effective dates across state + LOB transitions."
+    turns:
+      - turn: 1
+        question: "What is the effective date of the current Florida Homeowners HOBP filing?"
+        expected_action: answer
+        introduces_entities:
+          state: FL
+          lob: homeowners-hobp
+        expected_must_cite:
+          - product-states/homeowners-hobp-FL/rating-rules.md
+        expected_optional_cite:
+          - states/FL.md
+          - products/homeowners-hobp.md
+        expected_topics:
+          - "2026"
+          - "effective"
+      - turn: 2
+        question: "What about the Alabama Auto PPA manual?"
+        expected_action: answer
+        introduces_entities:
+          state: AL
+          lob: auto-ppa
+        expected_must_cite:
+          - product-states/auto-ppa-AL/rating-rules.md
+        expected_optional_cite:
+          - states/AL.md
+          - products/auto-ppa.md
+        expected_topics:
+          - "2026"
+          - "Alabama"
+
+  - id: s009
+    cq_category: forms
+    role: pds
+    description: "Cross-product comparison within a single state. Tests multi-product retrieval in one turn."
+    turns:
+      - turn: 1
+        question: "How does the Alaska Homeowners domestic-violence exception differ from the Alaska Auto PPA domestic-violence exception?"
+        expected_action: answer
+        introduces_entities:
+          state: AK
+        expected_must_cite:
+          - forms/HO-0854-02-21.md
+          - forms/PPA-0154-01-20.md
+        expected_optional_cite:
+          - forms/CIM-2003-06-20.md
+        expected_topics:
+          - "AS 18.66"
+          - "domestic violence"
+
+  - id: s010
+    cq_category: forms
+    role: pds
+    description: "Drilldown chain within one form. Tests stepwise narrowing where state + LOB + form_id should all inherit."
+    turns:
+      - turn: 1
+        question: "What does the Arizona amendatory exclude for transportation network drivers?"
+        expected_action: answer
+        introduces_entities:
+          state: AZ
+          lob: auto-ppa
+        expected_must_cite:
+          - forms/PA-0102-07-18.md
+        expected_optional_cite:
+          - product-states/auto-ppa-AZ/endorsements.md
+          - states/AZ.md
+        expected_topics:
+          - "transportation network"
+          - "exclusion"
+      - turn: 2
+        question: "What's the volunteer carve-out?"
+        expected_action: answer
+        inherits_entities:
+          state: AZ
+          lob: auto-ppa
+        expected_must_cite:
+          - forms/PA-0102-07-18.md
+        expected_topics:
+          - "volunteer"
+          - "tax-exempt"
+      - turn: 3
+        question: "Which statute defines that volunteer activity?"
+        expected_action: answer
+        inherits_entities:
+          state: AZ
+          lob: auto-ppa
+        expected_must_cite:
+          - forms/PA-0102-07-18.md
+        expected_optional_cite:
+          - states/AZ.md
+        expected_topics:
+          - "43-1201"
